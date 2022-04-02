@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817a90b0955c82f4ead14655556a6764, type: 3}
+  m_Name: Egg Sandwich
+  m_EditorClassIdentifier: 
+  id: 3
+  itemName: Egg Sandwich
+  description: Fried egg, greens and bread. It seems simple, but it's delicious.
+  itemArt: {fileID: 21300000, guid: 899a2ba960bbadd4a8f1a6556d6a3829, type: 3}
+  type: 0
+  amount_of_recovery: 5
+  ingridients:
+  - {fileID: 11400000, guid: 92c63fdd1f018004eb58b5259e6dba9e, type: 2}
+  - {fileID: 11400000, guid: 8e82851cfc22a9448b9ebdb51e339370, type: 2}
+  - {fileID: 11400000, guid: 73480bb75feea6245bd311a98aec3a69, type: 2}

@@ -1,0 +1,2 @@
+D:\uProj\AnimTry\obj\Debug\InkEditor.csproj.AssemblyReference.cache
+D:\uProj\AnimTry\obj\Debug\InkEditor.csproj.CoreCompileInputs.cache

@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 817a90b0955c82f4ead14655556a6764, type: 3}
+  m_Name: Cup of tea
+  m_EditorClassIdentifier: 
+  id: 2
+  itemName: Camomile tea
+  description: A hot cup of chamomile tea will calm your nerves and put you in a
+    good mood for work
+  itemArt: {fileID: 21300000, guid: 45bfc333de3a73c4b9de1975c2c07d1a, type: 3}
+  type: 1
+  amount_of_recovery: 3
+  ingridients:
+  - {fileID: 11400000, guid: 1a992eb79208f7b459d7df1f4d0a1960, type: 2}
+  - {fileID: 11400000, guid: f79181c8b12ac9b418676de9cc822f86, type: 2}
