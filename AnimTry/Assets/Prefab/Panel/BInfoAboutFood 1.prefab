@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 94614573079373679}
   - component: {fileID: 3382954818085556487}
   m_Layer: 5
-  m_Name: Trifle
+  m_Name: 'Waffles '
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -33,10 +33,10 @@ RectTransform:
   m_Father: {fileID: 7140402614761236589}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 7.0758, y: 1.2116}
-  m_SizeDelta: {x: 342.11, y: 27.577}
+  m_AnchorMin: {x: 0, y: 0.14328341}
+  m_AnchorMax: {x: 1, y: 0.675}
+  m_AnchoredPosition: {x: 0.12689209, y: 3.2585}
+  m_SizeDelta: {x: 0.2536, y: 20.126}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5274485436080913361
 CanvasRenderer:
@@ -59,7 +59,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.16470589}
+  m_Color: {r: 0.04150939, g: 0.05690537, b: 1, a: 0.003921569}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -154,8 +154,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -28.0648, y: 3.1981}
-  m_SizeDelta: {x: 103.8728, y: 18.653}
+  m_AnchoredPosition: {x: -47.155, y: -0.000074863}
+  m_SizeDelta: {x: 238.4, y: 45.896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6819008642310053514
 CanvasRenderer:
@@ -186,19 +186,19 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
-    m_FontSize: 14
-    m_FontStyle: 0
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
+    m_FontSize: 20
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Trifle
+  m_Text: 'Waffles '
 --- !u!1 &4913555411124241999
 GameObject:
   m_ObjectHideFlags: 0
@@ -234,8 +234,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -128.3433, y: 1.3526}
-  m_SizeDelta: {x: 71.271, y: 27.8588}
+  m_AnchoredPosition: {x: -218.7, y: 0.000072002}
+  m_SizeDelta: {x: 104.6851, y: 45.896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &2414460677858244976
 CanvasRenderer:
@@ -265,7 +265,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 268f7acea01fc36438a0943dd27a0280, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 6f4cbe5fec443d14a92a9af930d3ec2d, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -360,8 +360,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 89.066, y: 1.2117}
-  m_SizeDelta: {x: 178.13, y: 27.577}
+  m_AnchoredPosition: {x: 173.10591, y: 0.000085354}
+  m_SizeDelta: {x: 202.1181, y: 45.896}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &8564074367277552521
 CanvasRenderer:
@@ -392,13 +392,13 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_FontData:
-    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_Font: {fileID: 12800000, guid: e3265ab4bf004d28a9537516768c1c75, type: 3}
     m_FontSize: 14
-    m_FontStyle: 0
+    m_FontStyle: 1
     m_BestFit: 0
     m_MinSize: 10
     m_MaxSize: 40
-    m_Alignment: 0
+    m_Alignment: 4
     m_AlignByGeometry: 0
     m_RichText: 1
     m_HorizontalOverflow: 0
@@ -444,8 +444,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: -363.24997, y: 0}
+  m_AnchoredPosition: {x: 0, y: -75.033264}
+  m_SizeDelta: {x: 550.25, y: 45.2555}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6082556243705176596
 CanvasRenderer:
@@ -468,7 +468,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 0, b: 0, a: 0.392}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1

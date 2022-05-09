@@ -8,6 +8,9 @@ public class InSampleScene : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Character")
-            SceneManager.LoadScene("SampleScene");
+        {
+            SaveScript ReturnFromScene = this.gameObject.GetComponent<SaveScript>();
+            ReturnFromScene.SceneLoad();
+        }
     }
 }

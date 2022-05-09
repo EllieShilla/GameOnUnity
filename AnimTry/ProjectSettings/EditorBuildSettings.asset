@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/DinnerScene.unity
     guid: 72f6c9e196079fa4abe51407a456e395
   - enabled: 1
-    path: Assets/Scenes/Level1.unity
+    path: Assets/Scenes/Cafe.unity
     guid: b4fc02c9a1b4fd6409926ef7e792ff31
+  - enabled: 1
+    path: Assets/Scenes/RestaurantScene.unity
+    guid: 370643f531754354f84af94bf89c6e3a
   m_configObjects: {}

@@ -13,7 +13,7 @@ public class InFightScene : MonoBehaviour
     {
         if (other.gameObject.tag.Equals("Character"))
         {
-            CafeForCooking.CafeTitle = this.gameObject.GetComponent<InFightScene>().cafe.CafeName;
+            CafeForCooking.ChooseCafe.CafeName = this.gameObject.GetComponent<InFightScene>().cafe.CafeName;
 
             foreach (var character in GameObject.FindGameObjectsWithTag("Character"))
                 CharacterFoodComand.teamMembers.Add(character.name);

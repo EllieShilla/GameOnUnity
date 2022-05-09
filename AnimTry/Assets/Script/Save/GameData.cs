@@ -7,6 +7,5 @@ public class GameData : MonoBehaviour
 {
     public GameObject player;
     public Scene scene;
-
-
+    public string sceneName;
 }

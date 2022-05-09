@@ -7,5 +7,4 @@ public class BaseEnemy
 {
     public string enemyName;
     int countOfFood;
-    //public List<Food> foods;
 }

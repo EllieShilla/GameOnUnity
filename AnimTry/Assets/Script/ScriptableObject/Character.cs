@@ -10,9 +10,5 @@ public class Character : ScriptableObject
     public bool inCommand;
     public List<Food> foods;
     public GameObject character;
-    public List<Item> items;
-
     public float positionY;
-    public int money;
-
 }

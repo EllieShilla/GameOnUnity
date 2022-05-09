@@ -5,7 +5,6 @@ D:\uProj\AnimTry\Temp\Bin\Debug\Microsoft.Win32.Primitives.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\mscorlib.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\netstandard.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\Newtonsoft.Json.dll
-D:\uProj\AnimTry\Temp\Bin\Debug\SyntaxTree.VisualStudio.Unity.Bridge.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\System.AppContext.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\System.Collections.Concurrent.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\System.Collections.dll
@@ -200,7 +199,6 @@ D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.WindModule.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.XRModule.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\unityplastic.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\Unity.Cecil.dll
-D:\uProj\AnimTry\Temp\Bin\Debug\SyntaxTree.VisualStudio.Unity.Messaging.dll
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.xml
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.AIModule.xml
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.ARModule.xml
@@ -277,9 +275,9 @@ D:\uProj\AnimTry\Temp\Bin\Debug\UnityEditor.UIServiceModule.xml
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEditor.UnityConnectModule.xml
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEditor.UI.pdb
 D:\uProj\AnimTry\Temp\Bin\Debug\UnityEngine.UI.pdb
-D:\uProj\AnimTry\obj\Debug\Ink-Libraries.csproj.AssemblyReference.cache
 D:\uProj\AnimTry\obj\Debug\Ink-Libraries.csproj.CoreCompileInputs.cache
 D:\uProj\AnimTry\obj\Debug\Ink-Libraries.csproj.CopyComplete
 D:\uProj\AnimTry\obj\Debug\Ink-Libraries.dll
 D:\uProj\AnimTry\obj\Debug\Ink-Libraries.pdb
 D:\uProj\AnimTry\Temp\Bin\Debug\ICSharpCode.NRefactory.dll
+D:\uProj\AnimTry\obj\Debug\Ink-Libraries.csproj.AssemblyReference.cache

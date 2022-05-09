@@ -237,4 +237,5 @@ MonoBehaviour:
   StaminaBar: {fileID: 0}
   ReturnBar: {fileID: 0}
   Selector: {fileID: 3032795191064804135}
+  character: {fileID: 0}
   HeroToMove: {fileID: 0}

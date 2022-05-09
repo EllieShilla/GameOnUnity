@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class DialogueTrigger : MonoBehaviour
@@ -15,10 +16,18 @@ public class DialogueTrigger : MonoBehaviour
 
     bool playerInRange;
 
+    public GameObject ShopPanel;
+    public Cafe cafe;
+
+    [SerializeField]
+    private GameObject IntoPanel;
+    private Text PanelText;
+
     private void Awake()
     {
         playerInRange = false;
         visualCue.SetActive(false);
+        PanelText = IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>();
     }
 
     private void OnTriggerEnter(Collider other)
@@ -34,6 +43,8 @@ public class DialogueTrigger : MonoBehaviour
         if (other.gameObject.tag == "Character")
         {
             playerInRange = false;
+            IntoPanel.SetActive(false);
+
         }
     }
 
@@ -42,11 +53,15 @@ public class DialogueTrigger : MonoBehaviour
         if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
-            if (Input.GetKeyDown(KeyCode.E))
-                DialogueManager.GetInstance().StartDialogue(inkJSON);
 
-            if (Input.GetKeyDown(KeyCode.F))
-                SceneManager.LoadScene("FightScene");
+            PanelText.text = "Talk";
+            IntoPanel.SetActive(true);
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                IntoPanel.SetActive(false);
+                DialogueManager.GetInstance().StartDialogue(inkJSON, ShopPanel, cafe);
+            }
         }
         else
         {

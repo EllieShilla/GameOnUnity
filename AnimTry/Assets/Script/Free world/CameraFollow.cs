@@ -16,7 +16,7 @@ public class CameraFollow : MonoBehaviour
         }
         else
         {
-            target = GameObject.Find("Standing W_Briefcase Idle").transform;
+            target = GameObject.Find("MainCharacter").transform;
         }
     }
 

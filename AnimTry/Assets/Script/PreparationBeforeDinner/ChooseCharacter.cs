@@ -5,10 +5,10 @@ using UnityEngine.UI;
 
 public class ChooseCharacter : MonoBehaviour
 {
-    [SerializeField] private GameObject panel;
+    [SerializeField] private GameObject parentPanel;
     [SerializeField] private GameObject characterPanel;
-    [SerializeField] private List<Character> characters;
-
+    private List<Character> characters;
+    GameObject panel;
     public void UpdatePanel()
     {
         ShowCharacter();
@@ -18,11 +18,17 @@ public class ChooseCharacter : MonoBehaviour
     {
         //GameObject activePanel = panel;
         //activePanel.SetActive(true);
+
+        characters = new List<Character>();
+        characters.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.group);
+         panel = parentPanel.transform.GetChild(0).gameObject;
+
         ShowCharacter();
     }
 
     void ShowCharacter()
     {
+
         if (GameObject.FindGameObjectsWithTag("CharacterInPanel").Length > 0)
         {
             GameObject[] CharacterInPanel = GameObject.FindGameObjectsWithTag("CharacterInPanel");
@@ -50,11 +56,10 @@ public class ChooseCharacter : MonoBehaviour
                 GameObject Confectioner = charPanel.transform.GetChild(3).gameObject;
                 Confectioner.GetComponent<Text>().text = "Confectioner: " + character.baseHero.Confectioner.ToString();
 
-                Button b = charPanel.transform.GetChild(4).gameObject.GetComponent<Button>();
+                Button b = charPanel.transform.GetChild(5).gameObject.GetComponent<Button>();
                 SetNameToButton(b, character);
-                //b.name = character.baseHero.heroName;
 
-                GameObject img = charPanel.transform.GetChild(5).gameObject;
+                GameObject img = charPanel.transform.GetChild(4).gameObject;
                 img.GetComponent<Image>().sprite = character.characterPhoto;
 
                 var newCharPlane = Instantiate(charPanel, new Vector3(panel.transform.position.x, panel.transform.position.y, panel.transform.position.z), Quaternion.identity);
@@ -63,9 +68,6 @@ public class ChooseCharacter : MonoBehaviour
                 newCharPlane.name = "Character " + character.baseHero.heroName;
 
                 SetOnClick(b, character);
-
-                //Button btn = GameObject.Find(character.baseHero.heroName).GetComponent<Button>();
-                //btn.onClick.AddListener(delegate { ChoiceCharacter(character); });
             }
         }
     }

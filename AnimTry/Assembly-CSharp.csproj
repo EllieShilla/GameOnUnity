@@ -47,29 +47,36 @@
   <PropertyGroup>
     <ProjectTypeGuids>{E097FAD1-6243-4DAD-9C02-E9B9EFC3FFC1};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <UnityProjectGenerator>Package</UnityProjectGenerator>
-    <UnityProjectGeneratorVersion>2.0.14</UnityProjectGeneratorVersion>
+    <UnityProjectGeneratorVersion>2.0.15</UnityProjectGeneratorVersion>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows64:19</UnityBuildTarget>
     <UnityVersion>2020.3.21f1</UnityVersion>
   </PropertyGroup>
   <ItemGroup>
-    <Analyzer Include="C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
+    <Analyzer Include="C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\Extensions\Microsoft\Visual Studio Tools for Unity\Analyzers\Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets\Script\Save\SaveScriptBeforeFight.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\CafeForCooking.cs" />
     <Compile Include="Assets\Script\GroupCoin.cs" />
     <Compile Include="Assets\Script\Combat\FoodProcessing.cs" />
+    <Compile Include="Assets\Script\Inventory\ButtonsList.cs" />
     <Compile Include="Assets\Script\Save\Save.cs" />
     <Compile Include="Assets\Script\Combat\NewBehaviourScript.cs" />
+    <Compile Include="Assets\Script\Inventory\AllIngridients.cs" />
     <Compile Include="Assets\Script\FoodLists\ColdShopList.cs" />
     <Compile Include="Assets\Script\Inventory\ItemToInventory.cs" />
     <Compile Include="Assets\Script\InSampleScene.cs" />
+    <Compile Include="Assets\Script\Menu\PlayerData.cs" />
+    <Compile Include="Assets\Script\ScriptableObject\InventoryObj.cs" />
+    <Compile Include="Assets\Script\Shop\BuyIngridient.cs" />
     <Compile Include="Assets\Script\Combat\ClickForSearchInfo.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\ChooseCharacter.cs" />
     <Compile Include="Assets\Script\ScriptableObject\Ingridient.cs" />
+    <Compile Include="Assets\Script\Inventory\TooltipShow.cs" />
     <Compile Include="Assets\Script\ScriptableObject\Item.cs" />
+    <Compile Include="Assets\Script\Menu\Menu.cs" />
     <Compile Include="Assets\Script\Data\CharacterControl.cs" />
-    <Compile Include="Assets\Script\Inventory\ToInventory.cs" />
     <Compile Include="Assets\Script\Combat\BaseEnemy.cs" />
     <Compile Include="Assets\Script\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Script\Combat\PositionCharacter.cs" />
@@ -78,6 +85,7 @@
     <Compile Include="Assets\Script\ScriptableObject\Character.cs" />
     <Compile Include="Assets\Script\Inventory\QuestListInInventory.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
+    <Compile Include="Assets\Script\CreateItem\ItemList.cs" />
     <Compile Include="Assets\Script\Combat\BattleStateMachine.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\CreateHeroBar.cs" />
     <Compile Include="Assets\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs" />
@@ -86,6 +94,9 @@
     <Compile Include="Assets\Script\PreparationBeforeDinner\ShowMenu.cs" />
     <Compile Include="Assets\Script\Inventory\Inventory.cs" />
     <Compile Include="Assets\Script\Save\GameData.cs" />
+    <Compile Include="Assets\Script\CreateItem\ShowItemToCreate.cs" />
+    <Compile Include="Assets\Script\Inventory\IngridientListInventory.cs" />
+    <Compile Include="Assets\Script\Shop\CloseShop.cs" />
     <Compile Include="Assets\Script\Combat\EnemyStateMachine.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\StartCook.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\AddInformationToCharacter.cs" />
@@ -96,19 +107,24 @@
     <Compile Include="Assets\Script\FoodLists\ShowOrder.cs" />
     <Compile Include="Assets\Script\TrigerDialog.cs" />
     <Compile Include="Assets\Script\ScriptableObject\Food.cs" />
-    <Compile Include="Assets\Script\PreparationBeforeDinner\PreparationBeforeDinner.cs" />
     <Compile Include="Assets\Script\Combat\FoodOrder.cs" />
     <Compile Include="Assets\Script\Free world\Move.cs" />
-    <Compile Include="Assets\Script\Inventory\ItemListInInventory.cs" />
     <Compile Include="Assets\Script\Dialogue System\DialogBox.cs" />
     <Compile Include="Assets\Script\FoodLists\HotShopList.cs" />
+    <Compile Include="Assets\Script\CreateItem\StartCreateItem.cs" />
+    <Compile Include="Assets\VisitorList.cs" />
     <Compile Include="Assets\Script\Free world\InFightScene.cs" />
+    <Compile Include="Assets\Script\Combat\CreateVisitor.cs" />
     <Compile Include="Assets\Script\Inventory\BookmarksInventory.cs" />
     <Compile Include="Assets\Script\FoodLists\ConfectionerList.cs" />
+    <Compile Include="Assets\Script\Combat\BattleResultShow.cs" />
     <Compile Include="Assets\Script\Combat\HeroStateMaschine.cs" />
+    <Compile Include="Assets\Script\CreateItem\OpenCreateItemPanel.cs" />
+    <Compile Include="Assets\AddInventoryToObj.cs" />
     <Compile Include="Assets\Script\Free world\LevelUpWithBook.cs" />
     <Compile Include="Assets\Script\Combat\BaseHero.cs" />
     <Compile Include="Assets\Script\ScriptableObject\BooksWithStats.cs" />
+    <Compile Include="Assets\Script\Save\FromScene.cs" />
     <Compile Include="Assets\Script\Player.cs" />
     <Compile Include="Assets\Script\Inventory\CharacterListInInventory.cs" />
     <Compile Include="Assets\Script\Free world\InDinnerScene.cs" />
@@ -116,8 +132,10 @@
     <Compile Include="Assets\Script\FoodLists\ShowFoodList.cs" />
     <Compile Include="Assets\Script\Inventory\UseItem.cs" />
     <Compile Include="Assets\Script\Dialogue System\DialogueManager.cs" />
+    <Compile Include="Assets\Script\Menu\BinarySavingSystem.cs" />
     <Compile Include="Assets\Script\Inventory\CreateFoodForInventory.cs" />
     <Compile Include="Assets\Script\Save\SaveScript.cs" />
+    <Compile Include="Assets\Script\Inventory\Tooltip.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\TextMesh Pro\Shaders\TMPro.cginc" />

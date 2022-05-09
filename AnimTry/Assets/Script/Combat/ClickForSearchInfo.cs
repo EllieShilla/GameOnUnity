@@ -27,7 +27,9 @@ public class ClickForSearchInfo : MonoBehaviour, IPointerClickHandler
         //делает неактивным выделение всех посетителей
         foreach (var item in stateMachine.performList)
         {
+            if(GameObject.Find(item.fighter))
             GameObject.Find(item.fighter).transform.Find("ChooseV").gameObject.SetActive(false);
+
         }
 
         foreach (var item in stateMachine.foodOrders)
@@ -50,10 +52,6 @@ public class ClickForSearchInfo : MonoBehaviour, IPointerClickHandler
 
     }
 
-    void Update()
-    {
-
-    }
 }
 
 

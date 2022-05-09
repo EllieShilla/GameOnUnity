@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 97ff45f81d3136c48b08abd24d2ecfd4, type: 3}
+  m_Name: Caramel pudding
+  m_EditorClassIdentifier: 
+  foodName: Caramel pudding
+  description: Just eggs, sugar and milk, but what a taste.
+  foodArt: {fileID: 21300000, guid: c4c11d674713a9c4d80a5175377a8336, type: 3}
+  fullness: 4
+  taste: 6
+  typeOfFood: 0
+  skill: 6
+  price: 9
+  listOfEstablishments:
+  - {fileID: 11400000, guid: c4b1001cfb998854191539693e32a0e7, type: 2}

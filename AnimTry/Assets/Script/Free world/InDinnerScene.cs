@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
 public class InDinnerScene : MonoBehaviour
@@ -9,10 +10,44 @@ public class InDinnerScene : MonoBehaviour
     private Cafe cafe;
     [SerializeField]
     private string sceneName;
+    [SerializeField]
+    private string IntoTitle;
+    [SerializeField]
+    private GameObject IntoPanel;
+    private bool playerInRange = false;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Character")
-            SceneManager.LoadScene(sceneName);
+        {
+            playerInRange = true;
+            IntoPanel.SetActive(true);
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.gameObject.tag == "Character")
+        {
+            playerInRange = false;
+            IntoPanel.SetActive(false);
+        }
+    }
+
+    private void Update()
+    {
+        if (playerInRange)
+        {
+            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Entry";
+
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                IntoPanel.SetActive(false);
+                playerInRange = false;
+                SaveScript.saveData = true;
+                SceneManager.LoadScene(IntoTitle);
+            }
+        }
     }
 }
 

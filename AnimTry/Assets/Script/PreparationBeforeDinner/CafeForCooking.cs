@@ -4,5 +4,5 @@ using UnityEngine;
 
 public class CafeForCooking : MonoBehaviour
 {
-    public static string CafeTitle;
+    public static Cafe ChooseCafe;
 }

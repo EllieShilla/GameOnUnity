@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 using System.Threading;
 
 
@@ -21,7 +21,6 @@ public class FoodProcessing : MonoBehaviour
     //выбор блюда для подачи
    public IEnumerator ChoiceFood(string foodName)
     {
-
 
         if (GameObject.Find(ClickForSearchInfo.nameVisitor) != null)
         {
@@ -47,7 +46,6 @@ public class FoodProcessing : MonoBehaviour
 
                                 yield return null;
                             }
-                            //yield return 0;
                             PanelMiniGameWithCook.SetActive(false);
 
                             print("MiniGame.goodCook " + MiniGame.goodCook);
@@ -57,19 +55,10 @@ public class FoodProcessing : MonoBehaviour
                                 item.foodList.Remove(i);
                                 isDish = true;
                                 GroupCoin.coin += i.price;
-
-                                Debug.Log(GroupCoin.coin + " coin");
-
-                                foreach (var character in GameObject.FindGameObjectsWithTag("Character"))
-                                    if (character.name.Equals("Standing W_Briefcase Idle Combat(Clone)"))
-                                        character.GetComponent<HeroStateMaschine>().character.money += i.price;
-
-
                                 break;
                             }
                             else
                             {
-
                                 isDish = false;
                                 break;
                             }
@@ -79,7 +68,7 @@ public class FoodProcessing : MonoBehaviour
 
             }
 
-            stateMachine.FighterList.Insert(1, ClickForSearchInfo.nameVisitor);
+            stateMachine.FighterList.Insert(1, GameObject.Find(ClickForSearchInfo.nameVisitor));
             stateMachine.NextStep();
 
             if (!isDish)
@@ -112,11 +101,14 @@ public class FoodProcessing : MonoBehaviour
                     stateMachine.performList.RemoveAt(stateMachine.performList.FindIndex(i => i.fighter == ClickForSearchInfo.nameVisitor));
                     GameObject.Find(ClickForSearchInfo.nameVisitor).transform.Find("ChooseV").gameObject.SetActive(false);
 
-                    ////Destroy(GameObject.Find(ClickForSearchInfo.nameVisitor));
-                    ////GameObject.Find(ClickForSearchInfo.nameVisitor).SetActive(false);
+                    Destroy(GameObject.Find(ClickForSearchInfo.nameVisitor));     
+                    GameObject.Find(ClickForSearchInfo.nameVisitor).SetActive(false);   
 
                     if (BattleStateMachine.countVisitor < BattleStateMachine.countForWin)
                     {
+                        CreateVisitor createVisitor = new CreateVisitor();
+                        createVisitor.NewVisitors();
+
                         EnemyStateMachine.nextOrder = true;
                         BattleStateMachine.countVisitor += 1;
                     }
@@ -127,10 +119,10 @@ public class FoodProcessing : MonoBehaviour
 
                 if (stateMachine.foodOrders.Count == 0)
                 {
-                    Debug.Log("WIN");
-
-                    SceneManager.LoadScene("SampleScene");
-                    SceneManager.UnloadSceneAsync("FightScene");
+                    //stateMachine.BattleResultPanel.SetActive(true);
+                    BattleResultShow.GoodEnd = true;
+                    BattleResultShow.EndBattle = true;
+                    stateMachine.BattleResultPanel.SetActive(true);
 
                 }
 
@@ -149,22 +141,22 @@ public class FoodProcessing : MonoBehaviour
         switch (food.typeOfFood)
         {
             case Food.Type.ColdShop:
-                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.ColdShop >= food.skill)
+                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.ColdShop >= food.skill)
                     GoodCookAndStopCook_TRUE();
                 else
-                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.ColdShop, food.skill);
+                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.ColdShop, food.skill);
                 break;
             case Food.Type.HotShop:
-                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.HotShop >= food.skill)
+                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.HotShop >= food.skill)
                     GoodCookAndStopCook_TRUE();
                 else
-                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.HotShop, food.skill);
+                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.HotShop, food.skill);
                 break;
             case Food.Type.Confectioner:
-                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.Confectioner >= food.skill)
+                if (battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.Confectioner >= food.skill)
                     GoodCookAndStopCook_TRUE();
                 else
-                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0])].GetComponent<HeroStateMaschine>().baseHeroero.Confectioner, food.skill);
+                    RangeGoodFood(battleStateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[0].name)].GetComponent<HeroStateMaschine>().baseHeroero.Confectioner, food.skill);
                 break;
         }
 
@@ -194,10 +186,14 @@ public class FoodProcessing : MonoBehaviour
     //изменение стамины у персонажа и ее отображение. Если стамины недостаточно пропадает возможность готовить блюда
     void StaminaChange()
     {
-        HeroStateMaschine heroState = GameObject.Find(stateMachine.FighterList[0]).GetComponent<HeroStateMaschine>();
-        if (heroState.baseHeroero.currentStamina >= -1)
+        HeroStateMaschine heroState = stateMachine.FighterList[0].GetComponent<HeroStateMaschine>();
+        if (heroState.baseHeroero.currentStamina >= 2)
         {
             heroState.baseHeroero.currentStamina -= 2;
+
+            GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
+            CharacterInformPanel.transform.GetChild(1).GetComponent<Text>().text = heroState.baseHeroero.currentStamina + "/" + heroState.baseHeroero.stamina;
+
             heroState.StaminaBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.currentStamina / heroState.baseHeroero.stamina * 100 / 100, heroState.StaminaBar.rectTransform.localScale.y);
         }
 
@@ -207,10 +203,14 @@ public class FoodProcessing : MonoBehaviour
     //если персонаж подаст не то блюдо, либо его блюдо не получится из-за нехватки skill у него отнимется 1 return. Если return == 0, персонаж выбывает из игры
     void ReturnChange()
     {
-        HeroStateMaschine heroState = GameObject.Find(stateMachine.FighterList[stateMachine.FighterList.Count - 1]).GetComponent<HeroStateMaschine>();
+        HeroStateMaschine heroState = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<HeroStateMaschine>();
         if (heroState.baseHeroero.currentReturn > -1)
         {
             heroState.baseHeroero.currentReturn -= 1;
+
+            GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
+            CharacterInformPanel.transform.GetChild(2).GetComponent<Text>().text = heroState.baseHeroero.currentReturn + "/" + heroState.baseHeroero.Return;
+
             heroState.ReturnBar.rectTransform.localScale = new Vector2(100 * heroState.baseHeroero.currentReturn / heroState.baseHeroero.Return / 100, heroState.ReturnBar.rectTransform.localScale.y);
         }
     }

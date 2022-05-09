@@ -12,7 +12,6 @@ public class BookmarksInventory : MonoBehaviour, IPointerEnterHandler, IPointerE
     public bool isChoice = false;
     [SerializeField]
     private GameObject panel;
-    private List<Button> buttons;
     [SerializeField]
     private int index;
     InventoryController inventoryController;
@@ -22,15 +21,18 @@ public class BookmarksInventory : MonoBehaviour, IPointerEnterHandler, IPointerE
         inventoryController = new InventoryController();
         animator = button.GetComponent<Animator>();
 
-        if (!isChoice)
+        if (index!=0)
             animator.Play("Button_Always", 0, 0f);
         else
             animator.Play("Button_Choice", 0, 0f);
 
-        buttons = new List<Button>();
-        buttons.Add(panel.transform.GetChild(0).gameObject.GetComponent<Button>());
-        buttons.Add(panel.transform.GetChild(1).gameObject.GetComponent<Button>());
-        buttons.Add(panel.transform.GetChild(2).gameObject.GetComponent<Button>());
+        BookmarksInventory indexButton = panel.transform.GetChild(index).gameObject.GetComponent<Button>().GetComponent<BookmarksInventory>();
+        ButtonsList.buttons.Add(indexButton);
+    }
+
+    public int GetIndex()
+    {
+        return index;
     }
 
     public void OnPointerEnter(PointerEventData eventData)
@@ -47,13 +49,12 @@ public class BookmarksInventory : MonoBehaviour, IPointerEnterHandler, IPointerE
 
     public void OnPointerUp(PointerEventData eventData)
     {
-        foreach(var i in buttons)
+        foreach(var i in ButtonsList.buttons)
         {
-
-            if (i.GetComponent<BookmarksInventory>().isChoice)
+            if (i.isChoice)
             {
-                i.GetComponent<BookmarksInventory>().animator.Play("Button_In", 0, 0f);
-                i.GetComponent<BookmarksInventory>().isChoice = false;
+                i.animator.Play("Button_In", 0, 0f);
+                i.isChoice = false;
                 inventoryController.ChoosePage(index, GameObject.Find("Inventory"));
                 break;
             }

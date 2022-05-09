@@ -11,36 +11,43 @@ public class CreateFoodForInventory : MonoBehaviour
     public int WaitingForKey;
     public int CorrectKey;
     public int CountingDown;
-    public string[] abc = new string[4] {"W","A","D","S" };
-    bool isPass=true;
-    int CurrentCountofButton;
+    public string[] abc = new string[4] { "W", "A", "D", "S" };
+    bool isPass = true;
+    public static int CurrentCountofButton;
 
 
     private void Start()
     {
-        CurrentCountofButton = Random.Range(1, 7);
     }
+
     private void Update()
     {
-        Result();
-
-        if (CurrentCountofButton>0 && isPass)
+        if (StartCreateItem.isStartCreate)
         {
-            if (WaitingForKey == 0)
+            //Result();
+            if (CurrentCountofButton > 0 && isPass)
             {
-                QTEGen = Random.Range(0, 4);
-                CountingDown = 1;
-                StartCoroutine(CountDown());
+                if (WaitingForKey == 0)
+                {
+                    QTEGen = Random.Range(0, 4);
+                    CountingDown = 1;
+                    StartCoroutine(CountDown());
 
-                WaitingForKey = 1;
-                OutLetter(QTEGen);
+                    WaitingForKey = 1;
+                    OutLetter();
+                }
+
+                PressAnalyisis(QTEGen);
             }
 
-            PressAnalyisis(QTEGen);
+            Result();
+
         }
+
     }
 
-    void OutLetter(int numLetter)
+
+    void OutLetter()
     {
         switch (QTEGen)
         {
@@ -52,26 +59,61 @@ public class CreateFoodForInventory : MonoBehaviour
                 break;
             case 2:
                 DisplayBox[2].GetComponent<Text>().text = "[" + abc[QTEGen] + "]";
-                        break;
+                break;
             case 3:
                 DisplayBox[3].GetComponent<Text>().text = "[" + abc[QTEGen] + "]";
                 break;
         }
     }
+    static bool isPositiveResult = false;
+    static bool verification = false;
+    public static bool ReturnResult()
+    {
+        return isPositiveResult;
+    }
+
+    public static void ReZero()
+    {
+        verification = false;
+        isPositiveResult = false;
+    }
+
+
+    public static bool verificationOfResults()
+    {
+        return verification;
+    }
 
     void Result()
     {
+
         if (CurrentCountofButton == 0)
         {
             PassBox.GetComponent<Text>().text = "Вы приготовили отличное блюдо";
-
+            isPositiveResult = true;
         }
         if (!isPass)
         {
             PassBox.GetComponent<Text>().text = "Блюдо не удалось!";
+            isPositiveResult = false;
+        }
 
+        if (CurrentCountofButton == 0 || !isPass)
+        {
+            StartCoroutine(CloseQTEPanel());
         }
     }
+
+    IEnumerator CloseQTEPanel()
+    {
+        yield return new WaitForSeconds(2f);
+        PassBox.GetComponent<Text>().text = "";
+        isPass = true;
+        verification = true;
+        Move.canMove = true;
+        StartCreateItem.isStartCreate = false;
+    }
+
 
     void PressAnalyisis(int numLetter)
     {
@@ -132,29 +174,29 @@ public class CreateFoodForInventory : MonoBehaviour
         {
             case 1:
                 CountingDown = 2;
-                PassBox.GetComponent<Text>().text = "PASS!";
-                CurrentCountofButton-=1;
-                yield return new WaitForSeconds(1.5f);
+                PassBox.GetComponent<Text>().text = "ОТЛИЧНО";
+                CurrentCountofButton -= 1;
+                yield return new WaitForSeconds(0.1f);
                 CorrectKey = 0;
                 PassBox.GetComponent<Text>().text = "";
 
                 DisplayNull();
 
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(1f);
                 WaitingForKey = 0;
                 CountingDown = 1;
                 break;
             case 2:
                 CountingDown = 2;
-                PassBox.GetComponent<Text>().text = "FAIL!";
+                PassBox.GetComponent<Text>().text = "НЕУДАЧА";
                 isPass = false;
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(0.1f);
                 CorrectKey = 0;
                 PassBox.GetComponent<Text>().text = "";
 
                 DisplayNull();
 
-                yield return new WaitForSeconds(1.5f);
+                yield return new WaitForSeconds(0.5f);
                 WaitingForKey = 0;
                 CountingDown = 1;
                 break;
@@ -170,13 +212,13 @@ public class CreateFoodForInventory : MonoBehaviour
             CountingDown = 2;
             PassBox.GetComponent<Text>().text = "FAIL!";
             isPass = false;
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
             CorrectKey = 0;
             PassBox.GetComponent<Text>().text = "";
 
             DisplayNull();
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForSeconds(0.5f);
             WaitingForKey = 0;
             CountingDown = 1;
         }
@@ -184,7 +226,7 @@ public class CreateFoodForInventory : MonoBehaviour
 
     void DisplayNull()
     {
-        foreach(var disp in DisplayBox)
-        disp.GetComponent<Text>().text = "";
+        foreach (var disp in DisplayBox)
+            disp.GetComponent<Text>().text = "";
     }
 }

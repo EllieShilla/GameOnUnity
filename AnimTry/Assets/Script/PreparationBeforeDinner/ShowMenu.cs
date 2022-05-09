@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using System.Linq;
 
 public class ShowMenu : MonoBehaviour
 {
@@ -20,20 +21,18 @@ public class ShowMenu : MonoBehaviour
         }
     }
 
-    private void Awake()
-    {
-        Menu();
-    }
-
-
     //вывод меню кафе
     void Menu()
     {
-        Cafe[] allCafe = (Cafe[])Resources.FindObjectsOfTypeAll(typeof(Cafe));
 
-        foreach (var cafe in allCafe)
-        {
-            if (cafe.CafeName.Equals(CafeForCooking.CafeTitle))
+        ClearTheField();
+
+        Cafe[] allCafe = (Cafe[])Resources.FindObjectsOfTypeAll(typeof(Cafe));
+        Cafe cafe=allCafe.FirstOrDefault(item=>item.CafeName.Equals(CafeForCooking.ChooseCafe.CafeName));
+
+        //foreach (var cafe in allCafe)
+        //{
+        //    if (cafe.CafeName.Equals(CafeForCooking.CafeTitle))
                 foreach (var MenuItem in cafe.Menu)
                 {
                     GameObject foodPanel = panelForFood;
@@ -49,7 +48,15 @@ public class ShowMenu : MonoBehaviour
 
                     var newFoodPlane = Instantiate(foodPanel, new Vector3(menuPanel.transform.position.x, menuPanel.transform.position.y, menuPanel.transform.position.z), Quaternion.identity);
                     newFoodPlane.transform.parent = menuPanel.gameObject.transform;
+                    newFoodPlane.tag = "MenuItem";
                 }
-        }
+        //}
+    }
+
+    void ClearTheField()
+    {
+        GameObject[] MenuItems = GameObject.FindGameObjectsWithTag("MenuItem");
+        foreach (var item in MenuItems)
+            Destroy(item);
     }
 }

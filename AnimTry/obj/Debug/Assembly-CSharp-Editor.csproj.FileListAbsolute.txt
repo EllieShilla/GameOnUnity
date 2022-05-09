@@ -1,0 +1,2 @@
+D:\uProj\AnimTry\obj\Debug\Assembly-CSharp-Editor.csproj.AssemblyReference.cache
+D:\uProj\AnimTry\obj\Debug\Assembly-CSharp-Editor.csproj.CoreCompileInputs.cache

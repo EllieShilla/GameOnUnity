@@ -20,6 +20,6 @@ public class Food : ScriptableObject
     public Type typeOfFood;
     public int skill;
     public int price;
-    public List<string> listOfEstablishments;
+    public List<Cafe> listOfEstablishments;
 
 }

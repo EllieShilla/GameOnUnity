@@ -25,6 +25,7 @@ public class HeroStateMaschine : MonoBehaviour
     public Image PreassureBar;
     public Image StaminaBar;
     public Image ReturnBar;
+    public GameObject CharacterInformPanel; 
 
 
     [SerializeField]

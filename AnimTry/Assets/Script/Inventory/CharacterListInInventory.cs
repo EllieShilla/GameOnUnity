@@ -20,10 +20,11 @@ public class CharacterListInInventory : MonoBehaviour
 
             characters = new List<Character>();
 
-            if (GameObject.Find("Standing W_Briefcase Idle").GetComponent<Player>())
-                characters.AddRange(GameObject.Find("Standing W_Briefcase Idle").GetComponent<Player>().group);
+            if (GameObject.Find("InventoryGameObject"))
+                characters.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.group);
 
-            allCharacterPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject;
+            allCharacterPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
+
             aboutCharacterPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject;
             ShowCharacter();
                     InfoAboutCharacter(characters[0]);
@@ -32,15 +33,30 @@ public class CharacterListInInventory : MonoBehaviour
         }
     }
 
+    void DestroyCharacterGrid()
+    {
+        if (GameObject.FindGameObjectsWithTag("CharacterListInInventory").Length > 0)
+        {
+            GameObject[] ItemScroll = GameObject.FindGameObjectsWithTag("CharacterListInInventory");
+            foreach (GameObject item in ItemScroll)
+            {
+                Destroy(item);
+            }
+        }
+    }
 
     void ShowCharacter()
     {
+        DestroyCharacterGrid();
+
+
+
         for (int i = 0; i < characters.Count; i++)
         {
             GameObject panel = CharacterPanel;
             Image img = panel.transform.GetChild(0).gameObject.GetComponent<Image>();
             img.sprite = characters[i].characterPhoto;
-            img.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 2.7f);
+            //img.GetComponent<RectTransform>().sizeDelta = new Vector2(0.2f, 0.2f);
 
             Text charName = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
             charName.text = characters[i].baseHero.heroName;

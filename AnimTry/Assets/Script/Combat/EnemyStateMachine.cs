@@ -2,15 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using System.Linq;
 public class EnemyStateMachine : MonoBehaviour
 {
     public BaseEnemy baseEnemy;
     private BattleStateMachine stateMachine;
     private List<Food> order = new List<Food>();
     [SerializeField]
-    private GameObject Selector;
-
+    public GameObject Selector;
+    //private Animator animator;
 
 
     public enum TurnState
@@ -41,25 +41,14 @@ public class EnemyStateMachine : MonoBehaviour
         stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
         startPosition = transform.position;
 
-        foreach (Food item in Resources.FindObjectsOfTypeAll<Food>())
-        {
-            foreach (string i in item.listOfEstablishments)
-                if (i.Equals(CafeForCooking.CafeTitle))
-                    order.Add(item);
-        }
-
+        Cafe cafe = Resources.FindObjectsOfTypeAll<Cafe>().First(item => item.CafeName.Equals(CafeForCooking.ChooseCafe.CafeName));
+        order.AddRange(cafe.Menu);
 
         CoundOfFoodInOrder = Random.Range(1, order.Count);
         newOrder = new List<Food>();
 
         for (int i = 0; i < CoundOfFoodInOrder; i++)
             newOrder.Add(order[Random.Range(0, order.Count)]);
-
-        //foreach (var i in newOrder)
-        //    Debug.Log(i.foodName);
-
-                   
-
     }
 
     public static bool nextOrder = false;
@@ -114,7 +103,6 @@ public class EnemyStateMachine : MonoBehaviour
             myAttack.fighter = baseEnemy.enemyName;
             myAttack.Type = "BaseVisitor";
             myAttack.FighterObj = this.gameObject;
-            //myAttack.FighterTarget = stateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(item=>item.name== stateMachine.FighterList[0])];
             myAttack.FighterTarget = stateMachine.HeroesInBattle[Random.Range(0, stateMachine.HeroesInBattle.Count)];
             myAttack.foodListCount = CoundOfFoodInOrder;
             myAttack.foodList = newOrder;
@@ -190,16 +178,45 @@ public class EnemyStateMachine : MonoBehaviour
 
     void PressureChange()
     {
-        HeroStateMaschine heroState = GameObject.Find(stateMachine.FighterList[stateMachine.FighterList.Count - 1]).GetComponent<HeroStateMaschine>();
+        HeroStateMaschine heroState = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<HeroStateMaschine>();
 
-        //HeroStateMaschine heroState = HeroToAttack.GetComponent<HeroStateMaschine>();
-        if (heroState.baseHeroero.currentPressure < heroState.baseHeroero.Pressure)
+        if (heroState.baseHeroero.currentPressure+2 <= heroState.baseHeroero.Pressure)
         {
             heroState.baseHeroero.currentPressure += 2;
+
+            GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
+            CharacterInformPanel.transform.GetChild(0).GetComponent<Text>().text = heroState.baseHeroero.currentPressure + "/" + heroState.baseHeroero.Pressure;
+
             heroState.PreassureBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.Pressure * (heroState.baseHeroero.currentPressure / 100), heroState.PreassureBar.rectTransform.localScale.y);
         }
-        Debug.Log("preasure " + heroState.baseHeroero.currentPressure);
 
+        if (heroState.baseHeroero.currentPressure == heroState.baseHeroero.Pressure)
+        {
+            Animator animator = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<Animator>();
+            animator.SetBool("IsMaxPreassure", true);
+            animator.SetBool("IsStandUp", true);
+        }
+
+        if (heroState.baseHeroero.currentPressure == heroState.baseHeroero.Pressure)
+        {
+            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.FindIndex(z=>z.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(heroState.baseHeroero.heroName)));
+        }
+
+        int countPreassureMin = 0;
+
+        foreach(GameObject hero in stateMachine.HeroesInBattle)
+        {
+            BaseHero buff = hero.GetComponent<HeroStateMaschine>().baseHeroero;
+            if (buff.currentPressure == buff.Pressure)
+                countPreassureMin++;
+        }
+
+        if(stateMachine.HeroesInBattle.Count==countPreassureMin)
+        {
+            BattleResultShow.GoodEnd = false;
+            BattleResultShow.EndBattle=true;
+            StartCoroutine(stateMachine.EndFight());
+        }
     }
 
     public void AddNewVisitor()

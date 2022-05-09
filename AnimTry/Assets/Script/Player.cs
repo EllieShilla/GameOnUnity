@@ -6,7 +6,6 @@ public class Player : MonoBehaviour
 {
     Animator animator;
     public Character character;
-    public List<Character> group;
 
     private void Start()
     {

@@ -4,11 +4,10 @@ using UnityEngine;
 
 public class LevelUpWithBook : MonoBehaviour
 {
-   public void LevelUp(GameObject item)
+   public void LevelUp(BooksWithStats book)
     {
         List<Character> group = new List<Character>();
-        group.AddRange(GameObject.Find("Standing W_Briefcase Idle").GetComponent<Player>().group);
-        BooksWithStats book = item.GetComponent<ItemToInventory>().books;
+        group.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.group);
 
         foreach (var character in group)
         {

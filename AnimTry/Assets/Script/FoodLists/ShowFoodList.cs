@@ -19,12 +19,14 @@ public class ShowFoodList : MonoBehaviour
     {
         foodProcessing = gameObject.AddComponent<FoodProcessing>(); ;
         foodProcessing.SetPanelMiniGameWithCook(PanelMiniGameWithCook);
-
+        stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
     }
     private void Update()
     {
         if (workDrawFood)
         {
+            HeroStateMaschine heroState = stateMachine.FighterList[0].GetComponent<HeroStateMaschine>();
+
             if (confectionerFoodList != null)
                 for (int i = 0; i < confectionerFoodList.confectionerFood.Count; i++)
                 {
@@ -52,7 +54,13 @@ public class ShowFoodList : MonoBehaviour
 
                     //поиск кнопки на каждом из блюд и создание onClick
                     Button btn = GameObject.Find(food.foodName).GetComponent<Button>();
+                    btn.onClick.RemoveAllListeners();
                     btn.onClick.AddListener(delegate { StartCoroutine( foodProcessing.ChoiceFood(btn.name)); });
+
+                    if (heroState.baseHeroero.currentStamina < 2)
+                        btn.interactable = false;
+                    else 
+                        btn.interactable = true;
                 }
             workDrawFood = false;
         }

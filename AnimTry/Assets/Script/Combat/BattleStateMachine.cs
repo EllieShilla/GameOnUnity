@@ -25,7 +25,7 @@ public class BattleStateMachine : MonoBehaviour
 
     private Button nextButton;
     private Button cookButton;
-
+    public GameObject BattleResultPanel;
 
     public enum HeroGUI
     {
@@ -46,6 +46,14 @@ public class BattleStateMachine : MonoBehaviour
 
     bool isReady = false;
 
+    [SerializeField]
+    private GameObject FirstCamera;
+    [SerializeField]
+    private GameObject SecondCamera;
+
+
+    Image backgroundColor;
+
     void MyStart()
     {
         OrderPanel = GameObject.Find("OrderPanel");
@@ -56,7 +64,7 @@ public class BattleStateMachine : MonoBehaviour
         cookButton.onClick.AddListener(delegate { ActiveFoodListPanel(); });
 
         battleState = PerformAction.WAIT;
-        EnemysInBattle.AddRange(GameObject.FindGameObjectsWithTag("Enemy"));
+        EnemysInBattle.AddRange(GameObject.Find("VisitorList").GetComponent<VisitorList>().visitors);
         HeroesInBattle.AddRange(GameObject.FindGameObjectsWithTag("Character"));
 
         heroInput = HeroGUI.ACTIVATE;
@@ -64,7 +72,11 @@ public class BattleStateMachine : MonoBehaviour
         CreateFighterList();
         SelectorPrepare();
 
-        ShowFoodList.confectionerFoodList = GameObject.Find(FighterList[0]).GetComponent<ConfectionerList>();
+        //смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
+        backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
+        backgroundColor.color = new Color32(255, 205, 6, 255);
+
+        ShowFoodList.confectionerFoodList = FighterList[0].GetComponent<ConfectionerList>();
         ShowFoodList.workDrawFood = true;
 
         isReady = true;
@@ -122,7 +134,7 @@ public class BattleStateMachine : MonoBehaviour
 
     public void CollectActions(NewBehaviourScript input)
     {
-        performList.Insert(0,input);
+        performList.Insert(0, input);
     }
 
     public void AddCooker(CharacterObjInf input)
@@ -144,87 +156,117 @@ public class BattleStateMachine : MonoBehaviour
         heroInput = HeroGUI.ACTIVATE;
     }
 
-    public List<string> FighterList = new List<string>();
+    public List<GameObject> FighterList = new List<GameObject>();
 
     void CreateFighterList()
     {
         foreach (var i in HeroesInBattle)
-            FighterList.Add(i.name.ToString());
+            FighterList.Add(i);
     }
 
     public void NextStep()
     {
-        
-        if (FighterList[0].IndexOf("V") == 0)
+        if (!BattleResultShow.EndBattle)
         {
-            OrderPanel.SetActive(false);
+            if (FighterList[0].tag.Equals("Enemy"))
+            {
+                OrderPanel.SetActive(false);
 
                 int indexVisitor = performList.FindIndex(item => item.fighter.Equals(ClickForSearchInfo.nameVisitor));
 
-            if (performList.Count == 1)
-                 indexVisitor = 0;
+                if (performList.Count == 1)
+                    indexVisitor = 0;
 
                 //выбор героя который подавал блюдо
                 for (int i = 0; i < performList.Count; i++)
                 {
-                    performList[i].FighterTarget = HeroesInBattle.Find(i => i.name == FighterList[2]);
+                    //performList[i].FighterTarget = HeroesInBattle.Find(i => i.name == FighterList[2].name);
+                    performList[i].FighterTarget = HeroesInBattle.Find(i => i.name == FighterList[FighterList.Count - 1].name);
                 }
 
 
-
-            //if (performList[0].fighter.Equals(ClickForSearchInfo.nameVisitor))
-            //{
                 GameObject performer = GameObject.Find(performList[indexVisitor].fighter);
-                    if (performList[indexVisitor].Type.Equals("BaseVisitor"))
-                    {
-                        EnemyStateMachine ESM = performer.GetComponent<EnemyStateMachine>();
-                        ESM.HeroToAttack = performList[indexVisitor].FighterTarget;
-                        ESM.currentState = EnemyStateMachine.TurnState.ACTION;
-                    }
-            //}
+                if (performList[indexVisitor].Type.Equals("BaseVisitor"))
+                {
+                    EnemyStateMachine ESM = performer.GetComponent<EnemyStateMachine>();
+                    ESM.HeroToAttack = performList[indexVisitor].FighterTarget;
+                    ESM.currentState = EnemyStateMachine.TurnState.ACTION;
+                }
 
 
-            GameObject.Find(FighterList[0]).transform.Find("Selector").gameObject.SetActive(false);
+                FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
                 FighterList.RemoveAt(0);
 
-        }
-        else
-        {
-            HeroStateMaschine heroState = GameObject.Find(FighterList[0]).GetComponent<HeroStateMaschine>();
+                ////смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
+                //backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
+                //backgroundColor.color = new Color32(255, 205, 6, 255);
 
-            if (heroState.baseHeroero.currentReturn == 0)
-            {
-                GameObject.Find(FighterList[0]).transform.Find("Selector").gameObject.SetActive(false);
-                HeroesInBattle.RemoveAt(HeroesInBattle.FindIndex(i => i.name == FighterList[0]));
-                FighterList.RemoveAt(0);
             }
             else
             {
-                FighterList.Add(FighterList[0]);
-                FighterList.RemoveAt(0);
+                HeroStateMaschine heroState = FighterList[0].GetComponent<HeroStateMaschine>();
+
+                //смена фона панели информации на обычный
+                backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
+                backgroundColor.color = new Color32(255, 255, 255, 100);
+
+                if (heroState.baseHeroero.currentReturn == 0)
+                {
+                    FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
+                    HeroesInBattle.RemoveAt(HeroesInBattle.FindIndex(i => i.name == FighterList[0].name));
+                    FighterList.RemoveAt(0);
+                }
+                else
+                {
+                    FighterList.Add(FighterList[0]);
+                    FighterList.RemoveAt(0);
+                }
+
+                StartCoroutine(changeCamera());
+
+                //if(FighterList.Count>0)
+                FighterList[FighterList.Count - 1].transform.Find("Selector").gameObject.SetActive(false);
+
+                if (FighterList[0].tag.Equals("Enemy"))
+                    NextStep();
             }
 
-            GameObject.Find(FighterList[FighterList.Count - 1]).transform.Find("Selector").gameObject.SetActive(false);
+            ClearAndAddFoodToPanel();
 
-            if (FighterList[0].IndexOf("V") == 0)
-                NextStep();
+            FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
+            battleState = PerformAction.PERFORMACTION;
+
+            FoodPanel.SetActive(false);
+            OrderPanel.SetActive(false);
+        }
+    }
+
+    IEnumerator changeCamera()
+    {
+        yield return new WaitForSeconds(1.5f);
+
+        if (FighterList[0].transform.position.z <= -3)
+        {
+            FirstCamera.SetActive(true);
+            SecondCamera.SetActive(false);
+        }
+        else
+        {
+            FirstCamera.SetActive(false);
+            SecondCamera.SetActive(true);
         }
 
-        ClearAndAddFoodToPanel();
-
-        GameObject.Find(FighterList[0]).transform.Find("Selector").gameObject.SetActive(true);
-        battleState = PerformAction.PERFORMACTION;
-
-        FoodPanel.SetActive(false);
-        OrderPanel.SetActive(false);
+        //смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
+        backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
+        backgroundColor.color = new Color32(255, 205, 6, 255);
     }
 
     void SelectorPrepare()
     {
         for (int i = 1; i < FighterList.Count; i++)
-            GameObject.Find(FighterList[i]).transform.Find("Selector").gameObject.SetActive(false);
+            FighterList[i].transform.Find("Selector").gameObject.SetActive(false);
 
-        GameObject.Find(FighterList[0]).transform.Find("Selector").gameObject.SetActive(true);
+        FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
     }
 
     void ActiveFoodListPanel()
@@ -242,7 +284,13 @@ public class BattleStateMachine : MonoBehaviour
         foreach (var go in GOS)
             Destroy(go);
 
-        ShowFoodList.confectionerFoodList = GameObject.Find(FighterList[0]).GetComponent<ConfectionerList>();
+        ShowFoodList.confectionerFoodList = FighterList[0].GetComponent<ConfectionerList>();
         ShowFoodList.workDrawFood = true;
+    }
+
+    public IEnumerator EndFight()
+    {
+        yield return new WaitForSeconds(5f);
+        BattleResultPanel.SetActive(true);
     }
 }

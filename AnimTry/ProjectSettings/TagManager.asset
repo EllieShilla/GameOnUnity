@@ -14,6 +14,10 @@ TagManager:
   - Item
   - CharacterListInInventory
   - ItemInInventoryPanel
+  - IngridientsForItem
+  - IngridientInInventoryPanel
+  - MenuItem
+  - ItemForCreate
   layers:
   - Default
   - TransparentFX
