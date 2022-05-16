@@ -73,11 +73,13 @@
     <Compile Include="Assets\Script\Combat\ClickForSearchInfo.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\ChooseCharacter.cs" />
     <Compile Include="Assets\Script\ScriptableObject\Ingridient.cs" />
+    <Compile Include="Assets\Script\Menu\MenuButtonChangeColor.cs" />
     <Compile Include="Assets\Script\Inventory\TooltipShow.cs" />
     <Compile Include="Assets\Script\ScriptableObject\Item.cs" />
     <Compile Include="Assets\Script\Menu\Menu.cs" />
     <Compile Include="Assets\Script\Data\CharacterControl.cs" />
     <Compile Include="Assets\Script\Combat\BaseEnemy.cs" />
+    <Compile Include="Assets\Script\Menu\LoadBook.cs" />
     <Compile Include="Assets\Script\Inventory\InventoryController.cs" />
     <Compile Include="Assets\Script\Combat\PositionCharacter.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\CharacterFoodComand.cs" />
@@ -87,11 +89,11 @@
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\BasicInkExample.cs" />
     <Compile Include="Assets\Script\CreateItem\ItemList.cs" />
     <Compile Include="Assets\Script\Combat\BattleStateMachine.cs" />
-    <Compile Include="Assets\Script\PreparationBeforeDinner\CreateHeroBar.cs" />
     <Compile Include="Assets\_Heathen Engineering\Samples\UX Examples\Flat Icons [Free]\ToggleSetAnimatorBoolean.cs" />
     <Compile Include="Assets\Script\Data\CharacterData.cs" />
     <Compile Include="Assets\Ink\Demos\Basic Demo\Scripts\QuitGameOnKeypress.cs" />
     <Compile Include="Assets\Script\PreparationBeforeDinner\ShowMenu.cs" />
+    <Compile Include="Assets\Script\Free world\BookList.cs" />
     <Compile Include="Assets\Script\Inventory\Inventory.cs" />
     <Compile Include="Assets\Script\Save\GameData.cs" />
     <Compile Include="Assets\Script\CreateItem\ShowItemToCreate.cs" />

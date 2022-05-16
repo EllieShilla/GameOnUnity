@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class CameraFollow : MonoBehaviour
@@ -19,6 +20,7 @@ public class CameraFollow : MonoBehaviour
             target = GameObject.Find("MainCharacter").transform;
         }
     }
+
 
 
 }

@@ -65,7 +65,11 @@ public class StartCook : MonoBehaviour
             heroStateMaschineChar.character = item;
 
             heroStateMaschineChar.PreassureBar = charPlane.transform.GetChild(5).gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            heroStateMaschineChar.PreassureBar.rectTransform.localScale = new Vector2(item.baseHero.Pressure * (item.baseHero.currentPressure / 100), heroStateMaschineChar.PreassureBar.rectTransform.localScale.y);
+
             heroStateMaschineChar.StaminaBar = charPlane.transform.GetChild(6).gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
+            heroStateMaschineChar.StaminaBar.rectTransform.localScale = new Vector2(item.baseHero.currentStamina / item.baseHero.stamina * 100 / 100, heroStateMaschineChar.StaminaBar.rectTransform.localScale.y);
+
             heroStateMaschineChar.ReturnBar = charPlane.transform.GetChild(7).gameObject.transform.GetChild(0).GetChild(0).GetComponent<Image>();
             character.GetComponent<ConfectionerList>().confectionerFood.AddRange(item.foods);
 

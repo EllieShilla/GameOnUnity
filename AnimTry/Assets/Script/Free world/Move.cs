@@ -20,7 +20,6 @@ public class Move : MonoBehaviour
         animator = GetComponent<Animator>();
         inventoryController = new InventoryController();
     }
-
     private void Update()
     {
 
@@ -84,20 +83,21 @@ public class Move : MonoBehaviour
 
         if (!FromScene.isMenuActive)
         {
-            canMove = false;
             Menu.SetActive(true);
 
-            Button button = Menu.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>();
+            Button button = Menu.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
 
             if (SceneManager.GetActiveScene().name.Equals("FightScene"))
                 button.interactable = false;
             else
                 button.interactable = true;
+
+            Time.timeScale = 0f;
         }
         else
         {
-            canMove = true;
             Menu.SetActive(false);
+            Time.timeScale = 1f;
         }
 
         //действия при открытии и закрытии инвентаря

@@ -210,17 +210,17 @@ public class BattleStateMachine : MonoBehaviour
                 backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
                 backgroundColor.color = new Color32(255, 255, 255, 100);
 
-                if (heroState.baseHeroero.currentReturn == 0)
-                {
-                    FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
-                    HeroesInBattle.RemoveAt(HeroesInBattle.FindIndex(i => i.name == FighterList[0].name));
-                    FighterList.RemoveAt(0);
-                }
-                else
-                {
-                    FighterList.Add(FighterList[0]);
-                    FighterList.RemoveAt(0);
-                }
+                //if (heroState.baseHeroero.currentReturn < 1)
+                //{
+                //    FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
+                //    HeroesInBattle.RemoveAt(HeroesInBattle.FindIndex(i => i.name == FighterList[0].name));
+                //    FighterList.RemoveAt(0);
+                //}
+                //else
+                //{
+                FighterList.Add(FighterList[0]);
+                FighterList.RemoveAt(0);
+                ////}
 
                 StartCoroutine(changeCamera());
 
@@ -245,20 +245,30 @@ public class BattleStateMachine : MonoBehaviour
     {
         yield return new WaitForSeconds(1.5f);
 
-        if (FighterList[0].transform.position.z <= -3)
+        if (FighterList.Count > 0)
         {
-            FirstCamera.SetActive(true);
-            SecondCamera.SetActive(false);
+            if (FighterList[0].transform.position.z <= -3)
+            {
+                FirstCamera.SetActive(true);
+                SecondCamera.SetActive(false);
+            }
+            else
+            {
+                FirstCamera.SetActive(false);
+                SecondCamera.SetActive(true);
+            }
+
+            //смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
+            backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
+            backgroundColor.color = new Color32(255, 205, 6, 255);
         }
         else
         {
-            FirstCamera.SetActive(false);
-            SecondCamera.SetActive(true);
+            BattleResultShow.GoodEnd = false;
+            BattleResultShow.EndBattle = true;
+            StartCoroutine(EndFight());
         }
 
-        //смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
-        backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
-        backgroundColor.color = new Color32(255, 205, 6, 255);
     }
 
     void SelectorPrepare()

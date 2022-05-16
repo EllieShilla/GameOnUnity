@@ -9,7 +9,6 @@ public class Tooltip : MonoBehaviour
 
     Text toolText;
     RectTransform toolBackground;
-    //public RectTransform rectTransform;
 
     private void Awake()
     {
@@ -27,11 +26,6 @@ public class Tooltip : MonoBehaviour
 
     private void Update()
     {
-        //if (!GameObject.Find("Inventory") || !GameObject.Find("ChooseItemToCreate"))
-        //{
-        //    instance.gameObject.SetActive(false);
-        //}
-
         Vector2 localPoint=Input.mousePosition;
         localPoint.y = localPoint.y - 25f;
         float pivotX = localPoint.x / Screen.width;

@@ -14,13 +14,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   items:
   - {fileID: 11400000, guid: 1c7f65e2cc1b20f4ea451364240c51df, type: 2}
-  - {fileID: 11400000, guid: 8c4632d2344d732409b6b9c8e724d24b, type: 2}
-  - {fileID: 11400000, guid: 1c7f65e2cc1b20f4ea451364240c51df, type: 2}
+  - {fileID: 11400000, guid: b2951d7c023fe6a4fad93f3478a333ec, type: 2}
   ingridients:
-  - {fileID: 11400000, guid: 73480bb75feea6245bd311a98aec3a69, type: 2}
-  - {fileID: 11400000, guid: 92c63fdd1f018004eb58b5259e6dba9e, type: 2}
-  - {fileID: 11400000, guid: 92c63fdd1f018004eb58b5259e6dba9e, type: 2}
-  money: 404
+  - {fileID: 11400000, guid: f79181c8b12ac9b418676de9cc822f86, type: 2}
+  money: 138
   group:
   - {fileID: 11400000, guid: fdf6a58e3216e274bb34fb2dfda80b28, type: 2}
   - {fileID: 11400000, guid: c66470568582dd34fb8a16bac47029d0, type: 2}

@@ -15,3 +15,4 @@ MonoBehaviour:
   BookTitle: Meat, meat, meat. 1000 meat recipes
   type: 2
   count: 1
+  isLoot: 0

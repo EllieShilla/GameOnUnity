@@ -15,5 +15,5 @@ public class BooksWithStats : ScriptableObject
 
     public TypeOfStat type;
     public int count;
-
+    public bool isLoot;
 }

@@ -8,17 +8,12 @@ using UnityEngine.SceneManagement;
 
 public class SaveScriptBeforeFight : MonoBehaviour
 {
-    private GameData gameData;
-    private string savePath;
     public static bool saveFight = false;
 
     void Start()
     {
         if (FromScene.fromFightScene)
         {
-            //gameData = GetComponent<GameData>();
-            //savePath = Application.persistentDataPath + "/BeforeFightsave.save";
-
             LoadData();
             FromScene.fromFightScene = false;
         }
@@ -28,9 +23,6 @@ public class SaveScriptBeforeFight : MonoBehaviour
     {
         if (saveFight)
         {
-            //gameData = GetComponent<GameData>();
-            //savePath = Application.persistentDataPath + "/BeforeFightsave.save";
-
             if (!SceneManager.GetActiveScene().name.Equals("FightScene"))
             {
                 SaveData();
@@ -42,20 +34,6 @@ public class SaveScriptBeforeFight : MonoBehaviour
 
     public void SaveData()
     {
-        //var save = new Save()
-        //{
-        //    SavePositionX = gameData.player.transform.position.x,
-        //    SavePositionY = gameData.player.transform.position.y,
-        //    SavePositionZ = gameData.player.transform.position.z,
-        //    SaveSceneName = SceneManager.GetActiveScene().name.ToString()
-        //};
-
-        //BinaryFormatter binaryFormatter = new BinaryFormatter();
-        //using (var filestream = File.Create(savePath))
-        //{
-        //    binaryFormatter.Serialize(filestream, save);
-        //}
-
         GameObject player = GameObject.Find("MainCharacter");
         AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
         BinarySavingSystem.SavePlayer(inventory, player);
@@ -63,20 +41,6 @@ public class SaveScriptBeforeFight : MonoBehaviour
 
     public void LoadData()
     {
-        //if (File.Exists(savePath))
-        //{
-        //    Save save;
-        //    BinaryFormatter binaryFormatter = new BinaryFormatter();
-        //    using (var filestream = File.Open(savePath, FileMode.Open))
-        //    {
-        //        save = (Save)binaryFormatter.Deserialize(filestream);
-        //    }
-
-        //    gameData.player.transform.position = new Vector3(save.SavePositionX, save.SavePositionY, save.SavePositionZ);
-        //    gameData.player.transform.rotation = Quaternion.Euler(gameData.player.transform.rotation.x, gameData.player.transform.rotation.y, gameData.player.transform.rotation.z);
-        //    gameData.sceneName = save.SaveSceneName.ToString();
-        //}
-
         PlayerData data = BinarySavingSystem.LoadPlayer();
 
         GameObject player = GameObject.Find("MainCharacter");
@@ -110,25 +74,9 @@ public class SaveScriptBeforeFight : MonoBehaviour
 
     public void SceneLoad()
     {
-        //gameData = GetComponent<GameData>();
-        //savePath = Application.persistentDataPath + "/BeforeFightsave.save";
-
-        //if (File.Exists(savePath))
-        //{
-        //    Save save;
-        //    BinaryFormatter binaryFormatter = new BinaryFormatter();
-        //    using (var filestream = File.Open(savePath, FileMode.Open))
-        //    {
-        //        save = (Save)binaryFormatter.Deserialize(filestream);
-        //    }
-
-        //    gameData.sceneName = save.SaveSceneName.ToString();
-        //}
         FromScene.fromFightScene = true;
-        //SceneManager.LoadScene(gameData.sceneName);
-
         PlayerData data = BinarySavingSystem.LoadPlayer();
         SceneManager.LoadScene(data.sceneName);
     }
 }
-//InventoryOpenCube
+

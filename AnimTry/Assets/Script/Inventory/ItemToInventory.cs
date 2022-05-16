@@ -13,7 +13,10 @@ public class ItemToInventory : MonoBehaviour
     private GameObject BookUpPanel;
     private bool playerInRange = false;
 
+    private void Start()
+    {
 
+    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Character")
@@ -34,19 +37,27 @@ public class ItemToInventory : MonoBehaviour
 
     private void Update()
     {
-        if (playerInRange)
+        if (!book.isLoot)
         {
-            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Loot";
+            this.gameObject.SetActive(true);
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (playerInRange)
             {
-                IntoPanel.SetActive(false);
-                playerInRange = false;
-                levelUpWithBook = new LevelUpWithBook();
-                levelUpWithBook.LevelUp(book);
-                AddIfoToLuttingPanel();
+                IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Loot";
+
+                if (Input.GetKeyDown(KeyCode.E))
+                {
+                    IntoPanel.SetActive(false);
+                    playerInRange = false;
+                    levelUpWithBook = new LevelUpWithBook();
+                    levelUpWithBook.LevelUp(book);
+                    book.isLoot = true;
+                    AddIfoToLuttingPanel();
+                }
             }
         }
+        else
+            this.gameObject.SetActive(false);
     }
 
     void AddIfoToLuttingPanel()
@@ -62,7 +73,9 @@ public class ItemToInventory : MonoBehaviour
 
     void LottingPanelSetActiveFalse()
     {
+        print(book.isLoot);
         BookUpPanel.SetActive(false);
+        //this.gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
 }

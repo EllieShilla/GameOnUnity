@@ -53,7 +53,14 @@ public class Inventory : MonoBehaviour
         CoinPanelText = this.gameObject.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>();
 
         ShowInventory();
-        Description(items[0].itemName + "_Button");
+        if (items.Count > 0)
+        {
+            Description(items[0].itemName + "_Button");
+        }
+        else
+        {
+            descriptionItemPanel.SetActive(false);
+        }
 
         isCreate = false;
     }
@@ -72,7 +79,7 @@ public class Inventory : MonoBehaviour
 
             Button button = panel.transform.GetChild(2).gameObject.GetComponent<Button>();
             button.name = "_Button";
-            string ButtonName= noDupesItem[i].itemName + "_Button";
+            string ButtonName = noDupesItem[i].itemName + "_Button";
 
             int countItem = items.FindAll(itm => itm.itemName.Equals(noDupesItem[i].itemName)).Count;
             Text text = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
@@ -120,7 +127,7 @@ public class Inventory : MonoBehaviour
             newIngridientPanel.transform.parent = panel.transform.GetChild(2).transform;
             newIngridientPanel.tag = "IngridientsForItem";
 
-            newIngridientPanel.name = "IngridientName_"+ing.Title;
+            newIngridientPanel.name = "IngridientName_" + ing.Title;
             newIngridientPanel.AddComponent<TooltipShow>();
         }
 

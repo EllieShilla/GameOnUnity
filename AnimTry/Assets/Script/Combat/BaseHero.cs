@@ -19,6 +19,12 @@ public class BaseHero
     public float Confectioner;
     public float ColdShop;
     public float HotShop;
-    public float ChefStationWagon;
 
+
+    public float StartReturn;
+    public float StartPressure;
+    public float StartStamina;
+    public float StartConfectioner;
+    public float StartColdShop;
+    public float StartHotShop;
 }

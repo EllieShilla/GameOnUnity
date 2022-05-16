@@ -39,8 +39,6 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(true);
-                    print(inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.name);
-
 
                     CharacterListInInventory.isCreate = true;
 
@@ -58,7 +56,6 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(false);
-                    //InventoryScrollPanelShowAndHide(2, 0, 1, 3);
 
 
                     foreach (var z in GameObject.FindGameObjectsWithTag("CharacterListInInventory"))

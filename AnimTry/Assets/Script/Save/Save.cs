@@ -6,7 +6,6 @@ using UnityEngine.SceneManagement;
 [System.Serializable]
 public class Save 
 {
-    //public GameObject SaveGameObject;
     public float SavePositionX;
     public float SavePositionY;
     public float SavePositionZ;

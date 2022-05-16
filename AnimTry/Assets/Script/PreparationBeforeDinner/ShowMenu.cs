@@ -9,7 +9,6 @@ public class ShowMenu : MonoBehaviour
     [SerializeField] GameObject menuPanel;
     [SerializeField] GameObject panelForFood;
 
-
     public void ActivePanelMenu()
     {
         if (GameObject.Find("Menu"))
@@ -30,9 +29,7 @@ public class ShowMenu : MonoBehaviour
         Cafe[] allCafe = (Cafe[])Resources.FindObjectsOfTypeAll(typeof(Cafe));
         Cafe cafe=allCafe.FirstOrDefault(item=>item.CafeName.Equals(CafeForCooking.ChooseCafe.CafeName));
 
-        //foreach (var cafe in allCafe)
-        //{
-        //    if (cafe.CafeName.Equals(CafeForCooking.CafeTitle))
+
                 foreach (var MenuItem in cafe.Menu)
                 {
                     GameObject foodPanel = panelForFood;
@@ -50,7 +47,6 @@ public class ShowMenu : MonoBehaviour
                     newFoodPlane.transform.parent = menuPanel.gameObject.transform;
                     newFoodPlane.tag = "MenuItem";
                 }
-        //}
     }
 
     void ClearTheField()

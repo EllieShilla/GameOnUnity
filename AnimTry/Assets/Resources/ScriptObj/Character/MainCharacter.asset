@@ -17,13 +17,18 @@ MonoBehaviour:
     Return: 5
     currentReturn: 5
     Pressure: 10
-    currentPressure: 10
-    stamina: 16
-    currentStamina: 15
-    Confectioner: 3
+    currentPressure: 0
+    stamina: 12
+    currentStamina: 12
+    Confectioner: 7
     ColdShop: 6
-    HotShop: 6
-    ChefStationWagon: 2
+    HotShop: 7
+    StartReturn: 3
+    StartPressure: 10
+    StartStamina: 12
+    StartConfectioner: 6
+    StartColdShop: 6
+    StartHotShop: 6
   characterPhoto: {fileID: 21300000, guid: b1fa254207695894ebafa83dfc1c0f07, type: 3}
   inCommand: 1
   foods:

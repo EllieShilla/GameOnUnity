@@ -52,37 +52,42 @@ public class EnemyStateMachine : MonoBehaviour
     }
 
     public static bool nextOrder = false;
+
     void Update()
     {
-        switch (currentState)
+        if (stateMachine.FighterList.Count > 0)
         {
-            case (TurnState.PROCESSING):
-                FoodOrder();
-                UpgraidProgressBar();
-                break;
-            case (TurnState.CHOOSEACTION):
-                ChooseAction();
-                currentState = TurnState.WAITING;
-                break;
-            case (TurnState.WAITING):
+            switch (currentState)
+            {
+                case (TurnState.PROCESSING):
+                    FoodOrder();
+                    UpgraidProgressBar();
+                    break;
+                case (TurnState.CHOOSEACTION):
+                    ChooseAction();
+                    currentState = TurnState.WAITING;
+                    break;
+                case (TurnState.WAITING):
 
-                break;
-            case (TurnState.ACTION):
-                StartCoroutine(TimeForAction());
-                break;
-            case (TurnState.DEAD):
+                    break;
+                case (TurnState.ACTION):
+                    StartCoroutine(TimeForAction());
+                    break;
+                case (TurnState.DEAD):
 
-                break;
+                    break;
+            }
+
         }
 
 
         if (nextOrder)
-        { 
-            AddNewVisitor(); 
+        {
+            AddNewVisitor();
         }
 
 
-        }
+    }
 
     void UpgraidProgressBar()
     {
@@ -114,13 +119,13 @@ public class EnemyStateMachine : MonoBehaviour
     //вывод заказов отдельно
     void FoodOrder()
     {
-            if (stateMachine.foodOrders.Count < stateMachine.EnemysInBattle.Count)
-            {
-                FoodOrder foodOrder = new FoodOrder();
-                foodOrder.foodList = newOrder;
-                foodOrder.visitor = baseEnemy.enemyName;
-                stateMachine.Order(foodOrder);
-            }
+        if (stateMachine.foodOrders.Count < stateMachine.EnemysInBattle.Count)
+        {
+            FoodOrder foodOrder = new FoodOrder();
+            foodOrder.foodList = newOrder;
+            foodOrder.visitor = baseEnemy.enemyName;
+            stateMachine.Order(foodOrder);
+        }
     }
 
 
@@ -153,8 +158,8 @@ public class EnemyStateMachine : MonoBehaviour
         }
 
         //stateMachine.performList.RemoveAt(0);
-        if(stateMachine.performList.FindIndex(item => item.fighter.Equals(ClickForSearchInfo.nameVisitor))!=-1)
-        stateMachine.performList.RemoveAt(stateMachine.performList.FindIndex(item => item.fighter.Equals(ClickForSearchInfo.nameVisitor)));
+        if (stateMachine.performList.FindIndex(item => item.fighter.Equals(ClickForSearchInfo.nameVisitor)) != -1)
+            stateMachine.performList.RemoveAt(stateMachine.performList.FindIndex(item => item.fighter.Equals(ClickForSearchInfo.nameVisitor)));
         stateMachine.battleState = BattleStateMachine.PerformAction.WAIT;
 
         actionStarted = false;
@@ -180,7 +185,7 @@ public class EnemyStateMachine : MonoBehaviour
     {
         HeroStateMaschine heroState = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<HeroStateMaschine>();
 
-        if (heroState.baseHeroero.currentPressure+2 <= heroState.baseHeroero.Pressure)
+        if (heroState.baseHeroero.currentPressure + 2 <= heroState.baseHeroero.Pressure)
         {
             heroState.baseHeroero.currentPressure += 2;
 
@@ -199,29 +204,29 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (heroState.baseHeroero.currentPressure == heroState.baseHeroero.Pressure)
         {
-            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.FindIndex(z=>z.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(heroState.baseHeroero.heroName)));
+            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.FindIndex(z => z.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(heroState.baseHeroero.heroName)));
         }
 
         int countPreassureMin = 0;
 
-        foreach(GameObject hero in stateMachine.HeroesInBattle)
+        foreach (GameObject hero in stateMachine.HeroesInBattle)
         {
             BaseHero buff = hero.GetComponent<HeroStateMaschine>().baseHeroero;
             if (buff.currentPressure == buff.Pressure)
                 countPreassureMin++;
         }
 
-        if(stateMachine.HeroesInBattle.Count==countPreassureMin)
+        if (stateMachine.HeroesInBattle.Count == countPreassureMin)
         {
             BattleResultShow.GoodEnd = false;
-            BattleResultShow.EndBattle=true;
+            BattleResultShow.EndBattle = true;
             StartCoroutine(stateMachine.EndFight());
         }
     }
 
     public void AddNewVisitor()
     {
-        
+
 
         BattleStateMachine.newVisitor = true;
 
@@ -233,17 +238,17 @@ public class EnemyStateMachine : MonoBehaviour
     public void NewVisitor()
     {
 
-            Selector.SetActive(false);
+        Selector.SetActive(false);
 
-            currentState = TurnState.PROCESSING;
-            stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
-            startPosition = transform.position;
+        currentState = TurnState.PROCESSING;
+        stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
+        startPosition = transform.position;
 
 
-            CoundOfFoodInOrder = Random.Range(1, order.Count);
-            newOrder = new List<Food>();
+        CoundOfFoodInOrder = Random.Range(1, order.Count);
+        newOrder = new List<Food>();
 
-            for (int i = 0; i < CoundOfFoodInOrder; i++)
-                newOrder.Add(order[Random.Range(0, order.Count)]);
+        for (int i = 0; i < CoundOfFoodInOrder; i++)
+            newOrder.Add(order[Random.Range(0, order.Count)]);
     }
 }

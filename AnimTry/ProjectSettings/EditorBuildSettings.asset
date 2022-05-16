@@ -20,4 +20,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/RestaurantScene.unity
     guid: 370643f531754354f84af94bf89c6e3a
+  - enabled: 1
+    path: Assets/Scenes/MainCharactersHomeScene.unity
+    guid: 93e5859606deef848b266e6872453de1
   m_configObjects: {}

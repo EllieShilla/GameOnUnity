@@ -19,7 +19,7 @@ public class FoodProcessing : MonoBehaviour
     }
 
     //выбор блюда для подачи
-   public IEnumerator ChoiceFood(string foodName)
+    public IEnumerator ChoiceFood(string foodName)
     {
 
         if (GameObject.Find(ClickForSearchInfo.nameVisitor) != null)
@@ -40,9 +40,9 @@ public class FoodProcessing : MonoBehaviour
                             MiniGame.goodCook = false;
                             MiniGame.count = 0;
 
-                            while (!MiniGame.stopCook )
+                            while (!MiniGame.stopCook)
                             {
-                                 ChanseToCreateGoodFood(i, stateMachine);
+                                ChanseToCreateGoodFood(i, stateMachine);
 
                                 yield return null;
                             }
@@ -74,6 +74,7 @@ public class FoodProcessing : MonoBehaviour
             if (!isDish)
             {
                 ReturnChange();
+
             }
             else
             {
@@ -101,8 +102,8 @@ public class FoodProcessing : MonoBehaviour
                     stateMachine.performList.RemoveAt(stateMachine.performList.FindIndex(i => i.fighter == ClickForSearchInfo.nameVisitor));
                     GameObject.Find(ClickForSearchInfo.nameVisitor).transform.Find("ChooseV").gameObject.SetActive(false);
 
-                    Destroy(GameObject.Find(ClickForSearchInfo.nameVisitor));     
-                    GameObject.Find(ClickForSearchInfo.nameVisitor).SetActive(false);   
+                    Destroy(GameObject.Find(ClickForSearchInfo.nameVisitor));
+                    GameObject.Find(ClickForSearchInfo.nameVisitor).SetActive(false);
 
                     if (BattleStateMachine.countVisitor < BattleStateMachine.countForWin)
                     {
@@ -166,7 +167,7 @@ public class FoodProcessing : MonoBehaviour
 
 
     //если skill персонажа меньше чем того требует блюдо включается мини-игра, по результатам которой игрок либо приготовит блюдо либо нет
-   void  RangeGoodFood(float heroSkill, int foodSkill)
+    void RangeGoodFood(float heroSkill, int foodSkill)
     {
         float deficitSkill = foodSkill - heroSkill;
 
@@ -204,7 +205,7 @@ public class FoodProcessing : MonoBehaviour
     void ReturnChange()
     {
         HeroStateMaschine heroState = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<HeroStateMaschine>();
-        if (heroState.baseHeroero.currentReturn > -1)
+        if (heroState.baseHeroero.currentReturn > 0)
         {
             heroState.baseHeroero.currentReturn -= 1;
 
@@ -213,5 +214,21 @@ public class FoodProcessing : MonoBehaviour
 
             heroState.ReturnBar.rectTransform.localScale = new Vector2(100 * heroState.baseHeroero.currentReturn / heroState.baseHeroero.Return / 100, heroState.ReturnBar.rectTransform.localScale.y);
         }
+        else
+        {
+            GameObject CharacterInformPanel = heroState.CharacterInformPanel;
+
+            CharacterInformPanel.GetComponent<Image>().color = new Color(0, 0, 0, 100);
+            CharacterInformPanel.transform.GetChild(0).GetComponent<Image>().color = new Color(97, 88, 88, 255);
+
+            Animator animator = stateMachine.FighterList[stateMachine.FighterList.Count - 1].GetComponent<Animator>();
+            animator.SetBool("IsMaxPreassure", true);
+            animator.SetBool("IsStandUp", true);
+
+            stateMachine.FighterList[stateMachine.FighterList.Count - 1].transform.Find("Selector").gameObject.SetActive(false);
+            stateMachine.HeroesInBattle.RemoveAt(stateMachine.HeroesInBattle.FindIndex(i => i.name == stateMachine.FighterList[stateMachine.FighterList.Count - 1].name));
+            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.Count - 1);
+        }
     }
 }
+

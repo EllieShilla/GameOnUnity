@@ -10,7 +10,7 @@ public class BattleResultShow : MonoBehaviour
 
     public static bool GoodEnd = false;
     public static bool EndBattle = false;
-
+    SaveScriptBeforeFight ReturnFromFightScene;
     void Start()
     {
         if (GoodEnd)
@@ -27,13 +27,20 @@ public class BattleResultShow : MonoBehaviour
             EndBattle = false;
         }
 
+        ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
+        ReturnFromFightScene.SaveData();
     }
 
     public void CloseScene()
     {
-        SaveScriptBeforeFight ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
+        //SaveScriptBeforeFight ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
+
+        //if (GoodEnd)
+        //    ReturnFromFightScene.SaveData();
+
         ReturnFromFightScene.SceneLoad();
         SceneManager.UnloadSceneAsync("FightScene");
     }
 
 }
+

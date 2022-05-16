@@ -48,7 +48,7 @@ public class UseItem : MonoBehaviour
                         {
                             BattleStateMachine stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
                             GameObject buffObj = stateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(buff => buff.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(character.baseHero.heroName))];
-                            Animator animator=buffObj.GetComponent<Animator>();
+                            Animator animator = buffObj.GetComponent<Animator>();
                             stateMachine.FighterList.Add(buffObj);
                             animator.SetBool("IsMaxPreassure", false);
                             animator.SetBool("IsStandUp", false);
@@ -141,21 +141,23 @@ public class UseItem : MonoBehaviour
     {
         BattleStateMachine stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
 
-        GameObject[] GOS = GameObject.FindGameObjectsWithTag("FoodInPanel");
-        foreach (var go in GOS)
-            Destroy(go);
+        if (GameObject.Find("ConfectionerPanel"))
+        {
+            GameObject[] GOS = GameObject.FindGameObjectsWithTag("FoodInPanel");
+            foreach (var go in GOS)
+                Destroy(go);
 
-        ShowFoodList.confectionerFoodList = stateMachine.FighterList[0].GetComponent<ConfectionerList>();
-        ShowFoodList.workDrawFood = true;
-        stateMachine.FoodPanel.SetActive(false);
-        stateMachine.FoodPanel.SetActive(true);
-
+            ShowFoodList.confectionerFoodList = stateMachine.FighterList[0].GetComponent<ConfectionerList>();
+            ShowFoodList.workDrawFood = true;
+            stateMachine.FoodPanel.SetActive(false);
+            stateMachine.FoodPanel.SetActive(true);
+        }
 
         HeroStateMaschine heroState = stateMachine.FighterList.FirstOrDefault(i => i.name.Equals(character.baseHero.heroName)).GetComponent<HeroStateMaschine>();
         GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
         CharacterInformPanel.transform.GetChild(1).GetComponent<Text>().text = heroState.baseHeroero.currentStamina + "/" + heroState.baseHeroero.stamina;
 
-        //heroState.StaminaBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.currentStamina / heroState.baseHeroero.stamina * 100 / 100, heroState.StaminaBar.rectTransform.localScale.y);
+        heroState.StaminaBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.currentStamina / heroState.baseHeroero.stamina * 100 / 100, heroState.StaminaBar.rectTransform.localScale.y);
     }
 
     void ChangePreassurePanelInform(Character character)
@@ -166,7 +168,7 @@ public class UseItem : MonoBehaviour
         GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
         CharacterInformPanel.transform.GetChild(0).GetComponent<Text>().text = heroState.baseHeroero.currentPressure + "/" + heroState.baseHeroero.Pressure;
 
-        //heroState.PreassureBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.Pressure * (heroState.baseHeroero.currentPressure / 100), heroState.PreassureBar.rectTransform.localScale.y);
+        heroState.PreassureBar.rectTransform.localScale = new Vector2(heroState.baseHeroero.Pressure * (heroState.baseHeroero.currentPressure / 100), heroState.PreassureBar.rectTransform.localScale.y);
     }
 
 
