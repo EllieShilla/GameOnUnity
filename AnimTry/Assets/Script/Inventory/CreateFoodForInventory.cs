@@ -1,3 +1,4 @@
+using Assets.SimpleLocalization;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -89,14 +90,23 @@ public class CreateFoodForInventory : MonoBehaviour
 
         if (CurrentCountofButton == 0)
         {
-            PassBox.GetComponent<Text>().text = "Вы приготовили отличное блюдо";
+            if (LocalizationManager.Language.Equals("English"))
+                PassBox.GetComponent<Text>().text = "You cooked a great meal!";
+            else
+                PassBox.GetComponent<Text>().text = "Вы приготовили отличное блюдо!";
+
             isPositiveResult = true;
         }
         if (!isPass)
         {
-            PassBox.GetComponent<Text>().text = "Блюдо не удалось!";
+            if (LocalizationManager.Language.Equals("English"))
+                PassBox.GetComponent<Text>().text = "Dish failed!";
+            else 
+                PassBox.GetComponent<Text>().text = "Блюдо не удалось!";
+
             isPositiveResult = false;
         }
+        
 
         if (CurrentCountofButton == 0 || !isPass)
         {
@@ -174,7 +184,11 @@ public class CreateFoodForInventory : MonoBehaviour
         {
             case 1:
                 CountingDown = 2;
-                PassBox.GetComponent<Text>().text = "ОТЛИЧНО";
+                if (LocalizationManager.Language.Equals("English"))
+                    PassBox.GetComponent<Text>().text = "EXCELLENT";
+                else
+                    PassBox.GetComponent<Text>().text = "ОТЛИЧНО";
+
                 CurrentCountofButton -= 1;
                 yield return new WaitForSeconds(0.1f);
                 CorrectKey = 0;
@@ -188,7 +202,11 @@ public class CreateFoodForInventory : MonoBehaviour
                 break;
             case 2:
                 CountingDown = 2;
-                PassBox.GetComponent<Text>().text = "НЕУДАЧА";
+                if (LocalizationManager.Language.Equals("English"))
+                    PassBox.GetComponent<Text>().text = "FAILURE";
+                else 
+                    PassBox.GetComponent<Text>().text = "НЕУДАЧА";
+
                 isPass = false;
                 yield return new WaitForSeconds(0.1f);
                 CorrectKey = 0;

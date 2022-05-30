@@ -47,7 +47,7 @@ public class UseItem : MonoBehaviour
                         if (character.baseHero.currentPressure == character.baseHero.Pressure)
                         {
                             BattleStateMachine stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
-                            GameObject buffObj = stateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(buff => buff.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(character.baseHero.heroName))];
+                            GameObject buffObj = stateMachine.HeroesInBattle[stateMachine.HeroesInBattle.FindIndex(buff => buff.GetComponent<HeroStateMaschine>().baseHeroero.heroNameEng.Equals(character.baseHero.heroNameEng))];
                             Animator animator = buffObj.GetComponent<Animator>();
                             stateMachine.FighterList.Add(buffObj);
                             animator.SetBool("IsMaxPreassure", false);
@@ -125,7 +125,7 @@ public class UseItem : MonoBehaviour
             img.GetComponent<RectTransform>().sizeDelta = new Vector2(1, 3);
 
             Button button = GroupCharacterPanel.transform.GetChild(1).gameObject.GetComponent<Button>();
-            button.name = baseHero.heroName + "_" + item.id + "_Button";
+            button.name = baseHero.heroNameEng + "_" + item.id + "_Button";
 
             var newItemPanel = Instantiate(GroupCharacterPanel, new Vector3(PanelForGroup.transform.position.x, PanelForGroup.transform.position.y, PanelForGroup.transform.position.z), Quaternion.identity);
             newItemPanel.transform.parent = PanelForGroup.transform;
@@ -153,7 +153,7 @@ public class UseItem : MonoBehaviour
             stateMachine.FoodPanel.SetActive(true);
         }
 
-        HeroStateMaschine heroState = stateMachine.FighterList.FirstOrDefault(i => i.name.Equals(character.baseHero.heroName)).GetComponent<HeroStateMaschine>();
+        HeroStateMaschine heroState = stateMachine.FighterList.FirstOrDefault(i => i.name.Equals(character.baseHero.heroNameEng)).GetComponent<HeroStateMaschine>();
         GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
         CharacterInformPanel.transform.GetChild(1).GetComponent<Text>().text = heroState.baseHeroero.currentStamina + "/" + heroState.baseHeroero.stamina;
 
@@ -164,7 +164,7 @@ public class UseItem : MonoBehaviour
     {
         BattleStateMachine stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
 
-        HeroStateMaschine heroState = stateMachine.FighterList.FirstOrDefault(i => i.name.Equals(character.baseHero.heroName)).GetComponent<HeroStateMaschine>();
+        HeroStateMaschine heroState = stateMachine.FighterList.FirstOrDefault(i => i.name.Equals(character.baseHero.heroNameEng)).GetComponent<HeroStateMaschine>();
         GameObject CharacterInformPanel = heroState.CharacterInformPanel.transform.GetChild(8).gameObject;
         CharacterInformPanel.transform.GetChild(0).GetComponent<Text>().text = heroState.baseHeroero.currentPressure + "/" + heroState.baseHeroero.Pressure;
 

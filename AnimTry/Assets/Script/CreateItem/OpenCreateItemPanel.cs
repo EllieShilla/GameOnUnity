@@ -33,7 +33,9 @@ public class OpenCreateItemPanel : MonoBehaviour
     {
         if (playerInRange)
         {
-            InteractivePanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Create";
+            TextVariantLanguageInteractivePanel textVariantLanguage=new TextVariantLanguageInteractivePanel();
+            string q=InteractivePanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).name;
+            InteractivePanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = textVariantLanguage.PanelCreate();
 
             if (Input.GetKeyDown(KeyCode.E))
             {

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
+using System.IO;
+using Assets.SimpleLocalization;
 
 public class DialogueTrigger : MonoBehaviour
 {
@@ -13,6 +15,8 @@ public class DialogueTrigger : MonoBehaviour
     [Header("Ink JSON")]
     [SerializeField]
     TextAsset inkJSON;
+    [SerializeField]
+    TextAsset inkJSON_ENG;
 
     bool playerInRange;
 
@@ -48,19 +52,29 @@ public class DialogueTrigger : MonoBehaviour
         }
     }
 
+    [SerializeField]
+    private AudioSource GreetingSound;
     private void Update()
     {
         if (playerInRange && !DialogueManager.GetInstance().dialogueIsPlaying)
         {
             visualCue.SetActive(true);
 
-            PanelText.text = "Talk";
+            TextVariantLanguageInteractivePanel textVariantLanguage = new TextVariantLanguageInteractivePanel();
+            PanelText.text = textVariantLanguage.DialogTrigerPanel();
             IntoPanel.SetActive(true);
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 IntoPanel.SetActive(false);
-                DialogueManager.GetInstance().StartDialogue(inkJSON, ShopPanel, cafe);
+                //DialogueManager.GetInstance().StartDialogue(inkJSON, ShopPanel, cafe);
+                if (LocalizationManager.Language.Equals("English"))
+                    DialogueManager.GetInstance().StartDialogue(inkJSON_ENG, ShopPanel, cafe);
+                else
+                    DialogueManager.GetInstance().StartDialogue(inkJSON, ShopPanel, cafe);
+
+
+                GreetingSound.Play();
             }
         }
         else
@@ -71,3 +85,4 @@ public class DialogueTrigger : MonoBehaviour
 
 
 }
+

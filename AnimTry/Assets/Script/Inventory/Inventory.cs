@@ -46,7 +46,7 @@ public class Inventory : MonoBehaviour
         if (GameObject.Find("InventoryGameObject"))
             items.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.items);
 
-        var OrderByItem = items.OrderBy(p => p.itemName);
+        var OrderByItem = items.OrderBy(p => p.name);
         noDupesItem = OrderByItem.Distinct().ToList();
 
         allItemsPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.GetChild(0).gameObject;
@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
         ShowInventory();
         if (items.Count > 0)
         {
-            Description(items[0].itemName + "_Button");
+            Description(items[0].name + "_Button");
         }
         else
         {
@@ -79,9 +79,10 @@ public class Inventory : MonoBehaviour
 
             Button button = panel.transform.GetChild(2).gameObject.GetComponent<Button>();
             button.name = "_Button";
-            string ButtonName = noDupesItem[i].itemName + "_Button";
+            //string ButtonName = noDupesItem[i].itemName + "_Button";
+            string ButtonName = noDupesItem[i].name + "_Button";
 
-            int countItem = items.FindAll(itm => itm.itemName.Equals(noDupesItem[i].itemName)).Count;
+            int countItem = items.FindAll(itm => itm.name.Equals(noDupesItem[i].name)).Count;
             Text text = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
 
             if (countItem > 1)
@@ -103,12 +104,14 @@ public class Inventory : MonoBehaviour
     //вывод описания выбраного item 
     void Description(string buttonName)
     {
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
         ScrollPanelForGroup.SetActive(false);
 
-        Item item = noDupesItem.Find(i => i.itemName.Equals(buttonName.Split('_')[0]));
+        Item item = noDupesItem.Find(i => i.name.Equals(buttonName.Split('_')[0]));
         GameObject panel = descriptionItemPanel;
-        panel.transform.GetChild(0).gameObject.GetComponent<Text>().text = item.itemName;
-        panel.transform.GetChild(1).gameObject.GetComponent<Text>().text = item.description + "\n" + item.type + ": " + item.amount_of_recovery;
+        panel.transform.GetChild(0).gameObject.GetComponent<Text>().text = textVariantLanguage.ItemNameLocalization(item);
+        panel.transform.GetChild(1).gameObject.GetComponent<Text>().text = textVariantLanguage.ItemDescriptionLocalization(item) + "\n" + textVariantLanguage.ItemTypeLocalization(item) + ": " + item.amount_of_recovery;
 
         if (GameObject.FindGameObjectsWithTag("IngridientsForItem").Length > 0)
         {
@@ -127,7 +130,7 @@ public class Inventory : MonoBehaviour
             newIngridientPanel.transform.parent = panel.transform.GetChild(2).transform;
             newIngridientPanel.tag = "IngridientsForItem";
 
-            newIngridientPanel.name = "IngridientName_" + ing.Title;
+            newIngridientPanel.name = "IngridientName_" + ing.name;
             newIngridientPanel.AddComponent<TooltipShow>();
         }
 

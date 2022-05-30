@@ -7,6 +7,7 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
+using Assets.SimpleLocalization;
 
 public class Menu : MonoBehaviour
 {
@@ -16,15 +17,24 @@ public class Menu : MonoBehaviour
     }
     public void ExitFromGame()
     {
-        string savePath = Application.persistentDataPath + "/data.save";
-        if (!File.Exists(savePath))
-        {
-            string path = Application.persistentDataPath + "/gamesave.save";
-            if (File.Exists(path))
-                File.Delete(path);
-        }
-
         Application.Quit();
+    }
+
+    private void Awake()
+    {
+        if (SceneManager.GetActiveScene().name.Equals("MainMenuScene"))
+        {
+            GameObject menu = GameObject.Find("MENU").gameObject;
+
+            if (!File.Exists(Application.persistentDataPath + "/data.save"))
+            {
+                menu.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().interactable = false;
+            }
+            else
+            {
+                menu.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().interactable = true;
+            }
+        }
     }
 
     private void Start()
@@ -40,48 +50,11 @@ public class Menu : MonoBehaviour
             LoadGame();
             FromScene.isFirstOpen = false;
         }
-
     }
     void ContinueGame()
     {
-        PlayerData data = BinarySavingSystem.LoadPlayer();
-
-        GameObject player = GameObject.Find("MainCharacter");
-        player.transform.position = new Vector3(data.position[0], data.position[1], data.position[2]);
-
-        AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
-        inventory.inventoryObj.items.Clear();
-        inventory.inventoryObj.ingridients.Clear();
-        inventory.inventoryObj.group.Clear();
-
-        for (int i = 0; i < data.itemNames.Length; i++)
-        {
-            Item item = Resources.Load<Item>($"ScriptObj/Items/{data.itemNames[i]}");
-            inventory.inventoryObj.items.Add(item);
-        }
-
-        for (int i = 0; i < data.ingridients.Length; i++)
-        {
-            Ingridient ingridient = Resources.Load<Ingridient>($"ScriptObj/Ingridients/{data.ingridients[i]}");
-            inventory.inventoryObj.ingridients.Add(ingridient);
-        }
-
-        for (int i = 0; i < data.characters.Length; i++)
-        {
-            Character character = Resources.Load<Character>($"ScriptObj/Character/{data.characters[i]}");
-            character.baseHero.Pressure = Convert.ToInt32(data.charactersStat[i][0]);
-            character.baseHero.currentPressure = Convert.ToInt32(data.charactersStat[i][1]);
-            character.baseHero.stamina = Convert.ToInt32(data.charactersStat[i][2]);
-            character.baseHero.currentStamina = Convert.ToInt32(data.charactersStat[i][3]);
-            character.baseHero.Confectioner = Convert.ToInt32(data.charactersStat[i][4]);
-            character.baseHero.ColdShop = Convert.ToInt32(data.charactersStat[i][5]);
-            character.baseHero.HotShop = Convert.ToInt32(data.charactersStat[i][6]);
-            inventory.inventoryObj.group.Add(character);
-        }
-
-        //LoadBook.LoadBooksOnScene();
-
-        inventory.inventoryObj.money = data.money;
+        LoadCharacterOnScene loadCharacterOnScene = new LoadCharacterOnScene();
+        loadCharacterOnScene.LoadInformation();
     }
     public void LoadGame()
     {
@@ -90,6 +63,7 @@ public class Menu : MonoBehaviour
         SceneManager.LoadScene(data.sceneName);
     }
     Text TextInfo;
+
 
     public void SaveGame()
     {
@@ -116,13 +90,137 @@ public class Menu : MonoBehaviour
 
     public void ContinueFromPause()
     {
-        FromScene.isMenuActive = true;
+        //FromScene.isMenuActive = true;
+        Move.ActiveMenu(false);
     }
 
     public void ClosePanel()
     {
         GameObject.Find("MENU").transform.GetChild(1).gameObject.SetActive(false);
 
+    }
+
+    public void NewGame()
+    {
+        string savePath = Application.persistentDataPath + "/data.save";
+        File.Delete(savePath);
+        LoadGame();
+    }
+
+    public void OpenKeybinds()
+    {
+        GameObject.Find("MENU").transform.GetChild(2).gameObject.SetActive(true);
+    }
+
+    public void BackFromKeybinds()
+    {
+        GameObject.Find("MENU").transform.GetChild(2).gameObject.SetActive(false);
+    }
+
+    public void OpenOptionsPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(2).gameObject.SetActive(true);
+    }
+
+    public void CloseOptionsPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(2).gameObject.SetActive(false);
+    }
+
+    public void OpenLocalizationPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(4).gameObject.SetActive(true);
+    }
+
+    public void CloseLocalizationPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(4).gameObject.SetActive(false);
+    }
+
+    public void OpenKeyPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(3).gameObject.SetActive(true);
+    }
+
+    public void CloseKeyPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(3).gameObject.SetActive(false);
+    }
+
+    public void OpenCreditsPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(5).gameObject.SetActive(true);
+    }
+
+    public void CloseCreditsPanel()
+    {
+        GameObject.Find("MENU").transform.GetChild(5).gameObject.SetActive(false);
+    }
+
+    public void ToMainMenu()
+    {
+        SceneManager.LoadScene("MainMenuScene");
+    }
+    public void ChangeLanguage()
+    {
+        switch (LocalizationManager.Language)
+        {
+            case "English":
+                {
+                    LocalizationManager.Language = "Russian";
+
+                }
+                break;
+            case "Russian":
+                {
+                    LocalizationManager.Language = "English";
+                }
+                break;
+        }
+
+        PlayerPrefs.SetString("Language", LocalizationManager.Language);
+    }
+
+    public static void ActiveMenuButton(GameObject menu)
+    {
+        switch (SceneManager.GetActiveScene().name)
+        {
+            case "MainMenuScene":
+                {
+                    if (!File.Exists(Application.persistentDataPath + "/data.save"))
+                    {
+                        menu.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().interactable = false;
+                    }
+                    else
+                    {
+                        menu.transform.GetChild(0).transform.GetChild(0).GetComponent<Button>().interactable = true;
+                    }
+                }
+                break;
+            case "FightScene":
+                {
+                    //кнопка сохранения игры не активна на сцене боя
+                    Button button = menu.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
+
+                    if (SceneManager.GetActiveScene().name.Equals("FightScene"))
+                        button.interactable = false;
+                    else
+                        button.interactable = true;
+                }
+                break;
+            default:
+                {
+                    if (!File.Exists(Application.persistentDataPath + "/data.save"))
+                    {
+                        menu.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>().interactable = false;
+                    }
+                    else
+                    {
+                        menu.transform.GetChild(0).transform.GetChild(1).GetComponent<Button>().interactable = true;
+                    }
+                }
+                break;
+        }
     }
 }
 

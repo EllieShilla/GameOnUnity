@@ -21,6 +21,8 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(true);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(false);
+                    inventory.transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.SetActive(false);
+
                     //InventoryScrollPanelShowAndHide(0,1,2,3);
                     Inventory.isCreate = true;
 
@@ -39,6 +41,7 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(true);
+                    inventory.transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.SetActive(false);
 
                     CharacterListInInventory.isCreate = true;
 
@@ -54,9 +57,11 @@ public class InventoryController : MonoBehaviour
                 break;
             case 2:
                 {
+                    if(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.quests.Count>0)
+                    inventory.transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.SetActive(true);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(false);
-
+                    QuestListInventory.isCreate = true;
 
                     foreach (var z in GameObject.FindGameObjectsWithTag("CharacterListInInventory"))
                         Destroy(z);
@@ -75,6 +80,7 @@ public class InventoryController : MonoBehaviour
                 {
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(0).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject.SetActive(false);
+                    inventory.transform.GetChild(0).gameObject.transform.GetChild(4).gameObject.SetActive(false);
                     inventory.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.SetActive(true);
 
                     IngridientListInventory.isCreate = true;

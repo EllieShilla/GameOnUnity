@@ -5,7 +5,6 @@ using UnityEngine.UI;
 
 public class CharacterListInInventory : MonoBehaviour
 {
-
     GameObject allCharacterPanel;
     GameObject aboutCharacterPanel;
     List<Character> characters;
@@ -27,7 +26,7 @@ public class CharacterListInInventory : MonoBehaviour
 
             aboutCharacterPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(3).gameObject;
             ShowCharacter();
-                    InfoAboutCharacter(characters[0]);
+            InfoAboutCharacter(characters[0]);
 
             isCreate = false;
         }
@@ -49,7 +48,7 @@ public class CharacterListInInventory : MonoBehaviour
     {
         DestroyCharacterGrid();
 
-
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
 
         for (int i = 0; i < characters.Count; i++)
         {
@@ -59,10 +58,10 @@ public class CharacterListInInventory : MonoBehaviour
             //img.GetComponent<RectTransform>().sizeDelta = new Vector2(0.2f, 0.2f);
 
             Text charName = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
-            charName.text = characters[i].baseHero.heroName;
+            charName.text = textVariantLanguage.HeroNameLocalization(characters[i].baseHero);
 
             Button button = panel.transform.GetChild(2).gameObject.GetComponent<Button>();
-            button.name = characters[i].baseHero.heroName + "_Character_Inventory_Button";
+            button.name = characters[i].baseHero.heroNameEng + "_Character_Inventory_Button";
 
             var newItemPanel = Instantiate(panel, new Vector3(allCharacterPanel.transform.position.x, allCharacterPanel.transform.position.y, allCharacterPanel.transform.position.z), Quaternion.identity);
             newItemPanel.transform.parent = allCharacterPanel.transform;
@@ -82,13 +81,17 @@ public class CharacterListInInventory : MonoBehaviour
 
     void InfoAboutCharacter(Character character)
     {
-        aboutCharacterPanel.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = character.baseHero.heroName;
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
+        aboutCharacterPanel.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = textVariantLanguage.HeroNameLocalization(character.baseHero);
         aboutCharacterPanel.transform.GetChild(1).gameObject.GetComponent<Image>().sprite = character.characterPhoto;
-        aboutCharacterPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = "HotShop: " + character.baseHero.HotShop+ "\nColdShop: " + character.baseHero.ColdShop + "\nConfectioner: " + character.baseHero.Confectioner +
-            "\nPressure: "+character.baseHero.Pressure+ "\nStamina: " + character.baseHero.stamina + "\nReturn: " + character.baseHero.Return;
+        aboutCharacterPanel.transform.GetChild(2).gameObject.GetComponent<Text>().text = textVariantLanguage.HeroStatLocalization()[0] + character.baseHero.HotShop + "\n"+ textVariantLanguage.HeroStatLocalization()[1] + character.baseHero.ColdShop +
+            "\n" + textVariantLanguage.HeroStatLocalization()[2] + character.baseHero.Confectioner + "\n" + textVariantLanguage.HeroStatLocalization()[3]+
+       + character.baseHero.Pressure + "\n" + textVariantLanguage.HeroStatLocalization()[4] + character.baseHero.stamina + "\n" + textVariantLanguage.HeroStatLocalization()[5] + character.baseHero.Return;
 
     }
 }
+
 
 
 

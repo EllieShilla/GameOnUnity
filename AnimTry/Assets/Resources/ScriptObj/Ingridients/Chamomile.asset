@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ebc81800a2b043b7f2802088627db, type: 3}
   m_Name: Chamomile
   m_EditorClassIdentifier: 
-  Title: Chamomile
+  TitleEng: Chamomile
+  TitleRus: "\u0420\u043E\u043C\u0430\u0448\u043A\u0430"
   itemArt: {fileID: 21300000, guid: d982ef1183bfa3a48821662634f8c19b, type: 3}

@@ -42,19 +42,21 @@ public class ChooseCharacter : MonoBehaviour
         {
             if (character.inCommand)
             {
+                TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
                 GameObject charPanel = characterPanel;
 
                 GameObject nameChar = charPanel.transform.GetChild(0).gameObject;
-                nameChar.GetComponent<Text>().text = character.baseHero.heroName;
+                nameChar.GetComponent<Text>().text = textVariantLanguage.HeroNameLocalization(character.baseHero);
 
                 GameObject coldShop = charPanel.transform.GetChild(1).gameObject;
-                coldShop.GetComponent<Text>().text = "ColdShop: " + character.baseHero.ColdShop.ToString();
+                coldShop.GetComponent<Text>().text = textVariantLanguage.HeroStatLocalization()[1] + character.baseHero.ColdShop.ToString();
 
                 GameObject hotShop = charPanel.transform.GetChild(2).gameObject;
-                hotShop.GetComponent<Text>().text = "HotShop: " + character.baseHero.HotShop.ToString();
+                hotShop.GetComponent<Text>().text = textVariantLanguage.HeroStatLocalization()[0] + character.baseHero.HotShop.ToString();
 
                 GameObject Confectioner = charPanel.transform.GetChild(3).gameObject;
-                Confectioner.GetComponent<Text>().text = "Confectioner: " + character.baseHero.Confectioner.ToString();
+                Confectioner.GetComponent<Text>().text = textVariantLanguage.HeroStatLocalization()[2] + character.baseHero.Confectioner.ToString();
 
                 Button b = charPanel.transform.GetChild(5).gameObject.GetComponent<Button>();
                 SetNameToButton(b, character);
@@ -65,7 +67,7 @@ public class ChooseCharacter : MonoBehaviour
                 var newCharPlane = Instantiate(charPanel, new Vector3(panel.transform.position.x, panel.transform.position.y, panel.transform.position.z), Quaternion.identity);
                 newCharPlane.transform.parent = panel.gameObject.transform;
                 newCharPlane.tag = "CharacterInPanel";
-                newCharPlane.name = "Character " + character.baseHero.heroName;
+                newCharPlane.name = "Character " + character.baseHero.heroNameEng;
 
                 SetOnClick(b, character);
             }
@@ -94,10 +96,10 @@ public class ChooseCharacter : MonoBehaviour
         switch (gameObject.name)
         {
             case "HotShopButton":
-                button.name = character.baseHero.heroName + " HotShopButton";
+                button.name = character.baseHero.heroNameEng + " HotShopButton";
                 break;
             case "ColdShopButton":
-                button.name = character.baseHero.heroName + " ColdShopButton";
+                button.name = character.baseHero.heroNameEng + " ColdShopButton";
                 break;
         }
     }
@@ -108,15 +110,14 @@ public class ChooseCharacter : MonoBehaviour
         switch (gameObject.name)
         {
             case "HotShopButton":
-                btn = GameObject.Find(character.baseHero.heroName + " HotShopButton").GetComponent<Button>();
+                btn = GameObject.Find(character.baseHero.heroNameEng + " HotShopButton").GetComponent<Button>();
                 btn.onClick.AddListener(delegate { ChoiceCharacter(character); });
                 break;
             case "ColdShopButton":
-                btn = GameObject.Find(character.baseHero.heroName + " ColdShopButton").GetComponent<Button>();
+                btn = GameObject.Find(character.baseHero.heroNameEng + " ColdShopButton").GetComponent<Button>();
                 btn.onClick.AddListener(delegate { ChoiceCharacter(character); });
                 break;
         }
     }
 }
-
 

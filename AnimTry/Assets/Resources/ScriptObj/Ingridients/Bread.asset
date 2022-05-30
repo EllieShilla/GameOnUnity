@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ebc81800a2b043b7f2802088627db, type: 3}
   m_Name: Bread
   m_EditorClassIdentifier: 
-  Title: Bread
+  TitleEng: Bread
+  TitleRus: "\u0425\u043B\u0435\u0431"
   itemArt: {fileID: 21300000, guid: 35ba7c27800615e49b32546e67e4c3fb, type: 3}

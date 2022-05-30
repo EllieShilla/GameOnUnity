@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Character3NearTheRestaurant
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Restaurant visitor 3
+    heroNameEng: Gourmet 3
+    heroNameRus: "\u0413\u0443\u0440\u043C\u0430\u043D 3"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: f070c39f9ce422a4f9b99fa827b53074, type: 3}
   inCommand: 0
   foods: []

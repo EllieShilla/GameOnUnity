@@ -6,14 +6,8 @@ using UnityEngine.SceneManagement;
 
 public class InSampleScene : MonoBehaviour
 {
-    //private void OnTriggerEnter(Collider other)
-    //{
-    //    if (other.gameObject.tag == "Character")
-    //    {
-    //        SaveScript ReturnFromScene = this.gameObject.GetComponent<SaveScript>();
-    //        ReturnFromScene.SceneLoad();
-    //    }
-    //}
+    [SerializeField]
+    private Vector3 returnPosition;
 
     [SerializeField]
     private GameObject IntoPanel;
@@ -50,19 +44,15 @@ public class InSampleScene : MonoBehaviour
     {
         if (playerInRange)
         {
-            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Exit";
+            TextVariantLanguageInteractivePanel textVariantLanguage = new TextVariantLanguageInteractivePanel();
+            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = textVariantLanguage.PanelToSampleScene();
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 IntoPanel.SetActive(false);
                 playerInRange = false;
-
-                GameObject player = GameObject.Find("MainCharacter");
-                AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
-                BinarySavingSystem.SavePlayerBook(inventory, player);
-
-                SaveScript ReturnFromScene = this.gameObject.GetComponent<SaveScript>();
-                ReturnFromScene.SceneLoad();
+                FromScene.loadPosition = returnPosition;
+                SceneManager.LoadScene("SampleScene");
             }
         }
     }

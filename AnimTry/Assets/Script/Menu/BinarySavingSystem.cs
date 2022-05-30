@@ -4,19 +4,31 @@ using UnityEngine;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine.SceneManagement;
+using System;
+using System.Linq;
 
 public static class BinarySavingSystem
 {
     public static void SavePlayer(AddInventoryToObj inventory, GameObject player)
     {
         PlayerData playerData = new PlayerData(inventory, player);
+        PlayerData data;
+
         if (SceneManager.GetActiveScene().name.ToString().Equals("FightScene"))
         {
-            PlayerData data = BinarySavingSystem.LoadPlayer();
+            data = BinarySavingSystem.LoadPlayer();
             playerData.sceneName = data.sceneName;
             playerData.position[0] = data.position[0];
             playerData.position[1] = data.position[1];
             playerData.position[2] = data.position[2];
+        }
+
+        data = BinarySavingSystem.LoadPlayer();
+
+        if(data.booksName!=null)
+        for (int i = 0; i < data.booksName.Length; i++)
+        {
+            playerData.booksName[i] = data.booksName[i];
         }
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
@@ -27,19 +39,16 @@ public static class BinarySavingSystem
         stream.Close();
     }
 
-    public static void SavePlayerBook(AddInventoryToObj inventory, GameObject player)
+    //сохранение поднятых книг
+    public static void SavePlayerBook(String bookTitle)
     {
-        PlayerData playerData = new PlayerData(inventory, player);
+        PlayerData playerData = BinarySavingSystem.LoadPlayer();
 
-        PlayerData data = BinarySavingSystem.LoadPlayer();
-        playerData.sceneName = data.sceneName;
-        playerData.position[0] = data.position[0];
-        playerData.position[1] = data.position[1];
-        playerData.position[2] = data.position[2];
-        playerData.money = data.money;
-        playerData.characters = data.characters;
-        playerData.ingridients = data.ingridients;
-
+        for (int i = 0; i < playerData.booksName.Length; i++)
+        {
+            if (playerData.booksName[i].Split('_')[0].Equals(bookTitle))
+                playerData.booksName[i] = bookTitle + "_" + true.ToString();
+        }
 
         BinaryFormatter binaryFormatter = new BinaryFormatter();
         string savePath = Application.persistentDataPath + "/data.save";

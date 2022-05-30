@@ -5,7 +5,8 @@ using UnityEngine;
 [System.Serializable]
 public class BaseHero
 {
-    public string heroName;
+    public string heroNameEng;
+    public string heroNameRus;
 
     public float Return;
     public float currentReturn;

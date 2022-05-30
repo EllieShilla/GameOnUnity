@@ -15,8 +15,10 @@ public class PlayerData
     public string[] ingridients;
     public string[] characters;
     public string[][] charactersStat;
+    public string[][] quests;
     public string[] booksName;
-
+    public string[] questPhrases;
+    
     public PlayerData(AddInventoryToObj inventory, GameObject player)
     {
         money = inventory.inventoryObj.money;
@@ -33,7 +35,9 @@ public class PlayerData
         ingridients = new string[inventory.inventoryObj.ingridients.Count];
         characters = new string[inventory.inventoryObj.group.Count];
         charactersStat = new string[inventory.inventoryObj.group.Count][];
+        quests = new string[inventory.inventoryObj.quests.Count][];
         booksName = new string[Resources.LoadAll<BooksWithStats>("ScriptObj/BooksWithStats").Length];
+        questPhrases = new string[inventory.inventoryObj.questPhrases.Count];
 
         for (int i = 0; i < inventory.inventoryObj.items.Count; i++)
             itemNames[i] = inventory.inventoryObj.items[i].name;
@@ -56,12 +60,21 @@ public class PlayerData
                 charactersStat[i][6] = inventory.inventoryObj.group[i].baseHero.HotShop.ToString();
         }
 
-
         for (int i = 0; i < booksName.Length; i++)
         {
             BooksWithStats book = Resources.LoadAll<BooksWithStats>("ScriptObj/BooksWithStats")[i];
-            booksName[i] = book.name+"_" + book.isLoot.ToString();
+            booksName[i] = book.name + "_" + book.isLoot.ToString();
         }
+        for (int i = 0; i < inventory.inventoryObj.quests.Count; i++)
+        {
+            quests[i] = new string[3];
+            quests[i][0] = inventory.inventoryObj.quests[i].name;
+            quests[i][1] = inventory.inventoryObj.quests[i].isTaken.ToString();
+            quests[i][2] = inventory.inventoryObj.quests[i].isCompleted.ToString();
+        }
+
+        for (int i = 0; i < inventory.inventoryObj.questPhrases.Count; i++)
+            questPhrases[i] = inventory.inventoryObj.questPhrases[i];
     }
 
     public PlayerData()
@@ -93,7 +106,25 @@ public class PlayerData
         }
 
         itemNames = new string[0] { };
-        ingridients = new string[0] { }; ;
+        ingridients = new string[0] { };
+        quests = new string[0][] { };
+
+        int lenth = Resources.LoadAll<Quest>("ScriptObj/Quests").Length;
+
+        for(int i=0;i< Resources.LoadAll<Quest>("ScriptObj/Quests").Length; i++)
+        {
+            Resources.LoadAll<Quest>("ScriptObj/Quests")[i].isTaken = false;
+            Resources.LoadAll<Quest>("ScriptObj/Quests")[i].isCompleted = false;
+        }
+
+        //foreach (Quest quest_ in Resources.LoadAll<Quest>("ScriptObj/Quests") as Quest[])
+        //{
+        //    quest_.isTaken = false;
+        //    quest_.isCompleted = false;
+        //}
+
+        questPhrases=new string[0] { };
+
     }
 }
 

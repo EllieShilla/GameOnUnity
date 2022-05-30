@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Headwaiter
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Headwaiter
+    heroNameEng: Headwaiter
+    heroNameRus: "\u041C\u0435\u0442\u0440\u0434\u043E\u0442\u0435\u043B\u044C"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: 34689824f5cf7fc49981fcbf7d96794a, type: 3}
   inCommand: 0
   foods: []

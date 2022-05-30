@@ -37,7 +37,7 @@ public class IngridientListInventory : MonoBehaviour
         if (GameObject.Find("InventoryGameObject"))
             ingridients.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.ingridients);
 
-        var OrderByIngridient = ingridients.OrderBy(p => p.Title);
+        var OrderByIngridient = ingridients.OrderBy(p => p.name);
         noDupesIngridient = OrderByIngridient.Distinct().ToList();
 
         allIngridientsPanel = this.gameObject.transform.GetChild(0).gameObject.transform.GetChild(1).gameObject.transform.GetChild(3).gameObject.transform.GetChild(0).gameObject;
@@ -49,6 +49,8 @@ public class IngridientListInventory : MonoBehaviour
 
     void Show()
     {
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
         for (int i = 0; i < noDupesIngridient.Count; i++)
         {
             GameObject panel = panelForIngridient;
@@ -57,9 +59,9 @@ public class IngridientListInventory : MonoBehaviour
             img.GetComponent<RectTransform>().sizeDelta = new Vector2(120, 80);
 
             Text text = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
-            text.text = noDupesIngridient[i].Title;
+            text.text = textVariantLanguage.IngridientTitleLocalization(noDupesIngridient[i]);
 
-            int countIngridient = ingridients.FindAll(ing => ing.Title.Equals(noDupesIngridient[i].Title)).Count;
+            int countIngridient = ingridients.FindAll(ing => ing.name.Equals(noDupesIngridient[i].name)).Count;
             Text textCount = panel.transform.GetChild(2).gameObject.GetComponent<Text>();
 
             if (countIngridient > 1)

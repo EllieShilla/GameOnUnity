@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 3386060035728288229}
   - component: {fileID: 9073756284047014209}
   m_Layer: 5
-  m_Name: Girl_Character_Inventory_Button
+  m_Name: Sara_Character_Inventory_Button
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -273,7 +273,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Girl
+  m_Text: "\u0421\u0430\u0440\u0430"
 --- !u!1 &8905904537965977208
 GameObject:
   m_ObjectHideFlags: 0

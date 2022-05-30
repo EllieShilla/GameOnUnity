@@ -12,7 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03194ecd12ce4f2408a66d4855cb0aec, type: 3}
   m_Name: MeatBook
   m_EditorClassIdentifier: 
-  BookTitle: Meat, meat, meat. 1000 meat recipes
+  BookTitle_ENG: Meat, meat, meat. 1000 meat recipes.
+  BookTitle_RUS: "\u041C\u044F\u0441\u043E, \u043C\u044F\u0441\u043E, \u043C\u044F\u0441\u043E.
+    1000 \u043C\u044F\u0441\u043D\u044B\u0445 \u0440\u0435\u0446\u0435\u043F\u0442\u043E\u0432."
   type: 2
   count: 1
   isLoot: 0

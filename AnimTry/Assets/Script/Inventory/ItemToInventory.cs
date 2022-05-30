@@ -13,10 +13,6 @@ public class ItemToInventory : MonoBehaviour
     private GameObject BookUpPanel;
     private bool playerInRange = false;
 
-    private void Start()
-    {
-
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Character")
@@ -43,7 +39,10 @@ public class ItemToInventory : MonoBehaviour
 
             if (playerInRange)
             {
-                IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Loot";
+                TextVariantLanguageInteractivePanel textVariantLanguage = new TextVariantLanguageInteractivePanel();
+
+                //IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Loot";
+                IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = textVariantLanguage.PanelLoot();
 
                 if (Input.GetKeyDown(KeyCode.E))
                 {
@@ -62,10 +61,14 @@ public class ItemToInventory : MonoBehaviour
 
     void AddIfoToLuttingPanel()
     {
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
         BookUpPanel.SetActive(true);
         Text text = BookUpPanel.transform.GetChild(1).GetComponent<Text>();
-        text.text = "";
-        text.text += "Ты подобрал: " + book.BookTitle + "\n\n" + "Навык: " + book.type + " твоей команды вырос на " + book.count + ".";
+        text.text = textVariantLanguage.BookLootLocalization(book);
+
+        BinarySavingSystem.SavePlayerBook(book.name);
+
         Button button = BookUpPanel.transform.GetChild(2).GetComponent<Button>();
         button.onClick.AddListener(delegate { LottingPanelSetActiveFalse(); });
 
@@ -73,9 +76,7 @@ public class ItemToInventory : MonoBehaviour
 
     void LottingPanelSetActiveFalse()
     {
-        print(book.isLoot);
         BookUpPanel.SetActive(false);
-        //this.gameObject.SetActive(false);
         Destroy(this.gameObject);
     }
 }

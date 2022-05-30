@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RestCritic
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Mr GoodFood
+    heroNameEng: Mr GoodFood
+    heroNameRus: "\u041C\u0438\u0441\u0442\u0435\u0440 \u0413\u0443\u0434\u0424\u0443\u0434"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: 20a85130742039b4b99e2bbf295f5002, type: 3}
   inCommand: 0
   foods: []

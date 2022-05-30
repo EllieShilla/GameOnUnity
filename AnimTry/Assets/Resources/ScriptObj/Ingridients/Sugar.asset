@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ebc81800a2b043b7f2802088627db, type: 3}
   m_Name: Sugar
   m_EditorClassIdentifier: 
-  Title: Sugar
+  TitleEng: Sugar
+  TitleRus: "\u0421\u0430\u0445\u0430\u0440"
   itemArt: {fileID: 21300000, guid: c1c8cde2d2bebf946859a82a93496027, type: 3}

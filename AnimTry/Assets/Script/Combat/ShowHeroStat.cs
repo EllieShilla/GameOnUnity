@@ -25,11 +25,12 @@ public class ShowHeroStat : MonoBehaviour
     //вывод всех блюд на панель
     void DrawFood()
     {
-        
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
 
         GameObject panel = HeroStatPanelPrefab;
         GameObject HeroName = panel.transform.GetChild(1).gameObject;
-        HeroName.GetComponent<Text>().text = HeroStat.heroName;
+        //HeroName.GetComponent<Text>().text = HeroStat.heroName;
+        HeroName.GetComponent<Text>().text = textVariantLanguage.HeroNameLocalization(HeroStat);
     }
 
     private BattleStateMachine stateMachine;

@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff45f81d3136c48b08abd24d2ecfd4, type: 3}
   m_Name: Donut
   m_EditorClassIdentifier: 
-  foodName: Donut
-  description: Delicious, sweet and very chocolate donut
+  foodName_ENG: Donut
+  foodName_RUS: "\u041F\u043E\u043D\u0447\u0438\u043A"
+  description_ENG: Delicious, sweet and very chocolate donut.
+  description_RUS: "\u0412\u043A\u0443\u0441\u043D\u044B\u0439, \u0441\u043B\u0430\u0434\u043A\u0438\u0439
+    \u0438 \u043E\u0447\u0435\u043D\u044C \u0448\u043E\u043A\u043E\u043B\u0430\u0434\u043D\u044B\u0439
+    \u043F\u043E\u043D\u0447\u0438\u043A."
   foodArt: {fileID: 21300000, guid: 87794c6ec0bbd7b488b19afbe5ae6b36, type: 3}
   fullness: 3
   taste: 3

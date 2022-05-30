@@ -13,11 +13,14 @@ public class ShowItemToCreate : MonoBehaviour
     public GameObject panelForIngridients;
     public static bool startCreate = false;
     AddInventoryToObj InventoryGameObject;
+    TextVariantLanguageScriptObject textVariantLanguage;
+
     void Update()
     {
         if (startCreate)
         {
             DestroyItem();
+            textVariantLanguage = new TextVariantLanguageScriptObject();
 
             PrepareItemSkrollPanel();
             startCreate = false;
@@ -55,12 +58,14 @@ public class ShowItemToCreate : MonoBehaviour
         {
             Item itemBuff = items[i];
             GameObject panel = panelForItem;
-            panel.name= "Item_" + itemBuff.itemName;
+            //panel.name= "Item_" + itemBuff.itemName;
+            panel.name= "Item_" + itemBuff.name;
             Image img = panel.transform.GetChild(0).gameObject.GetComponent<Image>();
             img.sprite = itemBuff.itemArt;
 
             Text text = panel.transform.GetChild(1).gameObject.GetComponent<Text>();
-            text.text = itemBuff.itemName;
+            //text.text = itemBuff.itemName;
+            text.text = textVariantLanguage.ItemNameLocalization(itemBuff);
 
             GameObject newItemPanel = Instantiate(panel, new Vector3(scrollItemsPanel.transform.position.x, scrollItemsPanel.transform.position.y, scrollItemsPanel.transform.position.z), Quaternion.identity);
             newItemPanel.transform.parent = scrollItemsPanel.transform;
@@ -83,7 +88,7 @@ public class ShowItemToCreate : MonoBehaviour
 
         foreach (var allIng in ItemIngridient.ingridients)
         {
-            if (!InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.Title.Equals(allIng.Title)))
+            if (!InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.TitleEng.Equals(allIng.TitleEng)))
             {
                 isHaveAllIng = false;
                 break;
@@ -95,9 +100,11 @@ public class ShowItemToCreate : MonoBehaviour
     void Description(Item item, bool activeButton)
     {
         Text title = panelForInformantion.transform.GetChild(0).GetComponent<Text>();
-        title.text = item.itemName;
+        //title.text = item.itemName;
+        title.text = textVariantLanguage.ItemNameLocalization(item);
         Text description = panelForInformantion.transform.GetChild(1).GetComponent<Text>();
-        description.text = item.description;
+        //description.text = item.description;
+        description.text = textVariantLanguage.ItemDescriptionLocalization(item);
         Button button= panelForInformantion.transform.GetChild(3).GetComponent<Button>();
       
         if (!activeButton)
@@ -123,11 +130,11 @@ public class ShowItemToCreate : MonoBehaviour
             newIngridientPanel.transform.parent = panel.transform;
             newIngridientPanel.tag = "IngridientsForItem";
 
-            newIngridientPanel.name = "IngridientName_" + item.ingridients[i].Title;
+            newIngridientPanel.name = "IngridientName_" + item.ingridients[i].name;
             newIngridientPanel.AddComponent<TooltipShow>();
 
             //окрашивает в серый цвет отсутствующие ингридиенты
-            if (!InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.Title.Equals(item.ingridients[i].Title)))
+            if (!InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.name.Equals(item.ingridients[i].name)))
                 newIngridientPanel.GetComponent<Image>().color = new Color32(0, 0, 0, 130);
         }
         button.onClick.RemoveAllListeners();
@@ -162,7 +169,7 @@ public class ShowItemToCreate : MonoBehaviour
         //после создания блюда ингридиенты удаляются
         foreach (var ingridient in item.ingridients)
         {
-            if (InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.Title.Equals(ingridient.Title)))
+            if (InventoryGameObject.inventoryObj.ingridients.Find(ing => ing.name.Equals(ingridient.name)))
                 InventoryGameObject.inventoryObj.ingridients.Remove(ingridient);
         }
 

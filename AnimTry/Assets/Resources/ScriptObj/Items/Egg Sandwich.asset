@@ -13,8 +13,13 @@ MonoBehaviour:
   m_Name: Egg Sandwich
   m_EditorClassIdentifier: 
   id: 3
-  itemName: Egg Sandwich
-  description: Fried egg, greens and bread. It seems simple, but it's delicious.
+  itemName_ENG: Egg Sandwich
+  itemName_RU: "\u042F\u0438\u0447\u043D\u044B\u0439 \u0441\u044D\u043D\u0434\u0432\u0438\u0447"
+  description_ENG: Fried egg, greens and bread. It seems simple, but it's delicious.
+  description_RU: "\u0416\u0430\u0440\u0435\u043D\u043E\u0435 \u044F\u0439\u0446\u043E,
+    \u0437\u0435\u043B\u0435\u043D\u044C \u0438 \u0445\u043B\u0435\u0431. \u0412\u0440\u043E\u0434\u0435
+    \u0431\u044B \u043F\u0440\u043E\u0441\u0442\u043E, \u043D\u043E \u0442\u0430\u043A
+    \u0432\u043A\u0443\u0441\u043D\u043E."
   itemArt: {fileID: 21300000, guid: 899a2ba960bbadd4a8f1a6556d6a3829, type: 3}
   type: 0
   amount_of_recovery: 5

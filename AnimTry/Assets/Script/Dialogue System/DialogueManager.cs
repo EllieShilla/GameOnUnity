@@ -1,4 +1,5 @@
 using System;
+using System.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -16,24 +17,28 @@ public class DialogueManager : MonoBehaviour
     private Button ChoiceButton;
     public Story story;
     [SerializeField]
-    private GameObject ContinueDialogueButton;  
+    private GameObject ContinueDialogueButton;
     [SerializeField]
     private GameObject ChoiceButtonPanel;
 
     private GameObject ShopPanel;
     private Cafe cafe;
 
+    string charName = "";
 
     static DialogueManager instance;
+
+    QuestSystem questSystem;
     public bool dialogueIsPlaying { get; private set; }
 
-     void Awake()
+    void Awake()
     {
         instance = this;
     }
     private void Start()
     {
         dialogueIsPlaying = false;
+        questSystem = new QuestSystem();
     }
     public void StartDialogue(TextAsset inkJSON, GameObject ShopPanel, Cafe cafe)
     {
@@ -46,13 +51,12 @@ public class DialogueManager : MonoBehaviour
         RefreshView();
     }
 
-   public void RefreshView()
+    public void RefreshView()
     {
         RemoveChoice();
 
         if (story.canContinue)
         {
-            string charName = "";
             string text = story.Continue();
             if (text.Contains("["))
             {
@@ -62,15 +66,16 @@ public class DialogueManager : MonoBehaviour
             }
 
             text = text.Trim();
-            CreateContextView(text,charName);
+            CreateContextView(text, charName);
 
-
+            Move.canMove = false;
         }
         else
         {
             dialogueIsPlaying = false;
             DialoguePanel.SetActive(false);
             ChoiceButtonPanel.SetActive(false);
+            Move.canMove = true;
         }
 
         if (story.currentChoices.Count > 0)
@@ -81,12 +86,45 @@ public class DialogueManager : MonoBehaviour
             for (int i = 0; i < story.currentChoices.Count; i++)
             {
                 Choice choice = story.currentChoices[i];
-                Button btn = CreateChoiceView(choice.text.Trim());
-
-                btn.onClick.AddListener(delegate
+               
+                switch (choice.text.Trim().Split()[0])
                 {
-                    OnClickChoiceButton(choice);
-                });
+                    case "_QUEST_":
+                        {
+                            Quest quest_ = Resources.LoadAll<Quest>("ScriptObj/Quests").FirstOrDefault(i => i.name.Equals(choice.text.Split()[1]));
+                            InventoryObj inventoryObj = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj;
+
+                            if (inventoryObj.quests.FirstOrDefault(i=>i.name.Equals(quest_.name)) == null)
+                            {
+                                CreateButtonChoice(choice);
+                            }
+                        }
+                        break;
+                    case "_QUESTCONTINUE_":
+                        {
+                            Quest quest_ = Resources.LoadAll<Quest>("ScriptObj/Quests").FirstOrDefault(i => i.name.Equals(choice.text.Split()[1]));
+                            InventoryObj inventoryObj = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj;
+
+                            if (inventoryObj.quests.FirstOrDefault(i => i.name.Equals(quest_.name)))
+                            {
+                                CreateButtonChoice(choice);
+                            }
+                        }
+                        break;
+                    case "_QUESTDONE_":
+                        {
+                            if (questSystem.QuetsSearch(GameObject.Find(charName).GetComponent<Player>().quest) && !GameObject.Find(charName).GetComponent<Player>().quest.isCompleted)
+                            {
+                                CreateButtonChoice(choice);
+                            }
+                        }
+                        break;
+                    default:
+                        {
+                            CreateButtonChoice(choice);
+                        }
+                        break;
+                }
             }
         }
         else
@@ -94,10 +132,21 @@ public class DialogueManager : MonoBehaviour
 
     }
 
+    void CreateButtonChoice(Choice options)
+    {
+        Button btn = CreateChoiceView(options.text.Trim());
+
+        btn.onClick.AddListener(delegate
+        {
+            OnClickChoiceButton(options);
+        });
+    }
+
     void CreateContextView(string letters, string charName)
     {
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
         Character character = GameObject.Find(charName).transform.GetComponent<Player>().character;
-        DialoguePanel.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = character.baseHero.heroName;
+        DialoguePanel.transform.GetChild(0).transform.GetChild(0).gameObject.GetComponent<Text>().text = textVariantLanguage.HeroNameLocalization(character.baseHero);
         DialoguePanel.transform.GetChild(3).transform.GetChild(0).gameObject.GetComponent<Image>().sprite = character.characterPhoto;
         DialoguePanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = letters;
     }
@@ -109,6 +158,12 @@ public class DialogueManager : MonoBehaviour
             btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText.Substring(4, choiceText.Length - 4);
         else if (choiceText.Split()[0].Equals("_FIGHT_"))
             btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText.Substring(7, choiceText.Length - 7);
+        else if (choiceText.Split()[0].Equals("_QUEST_"))
+            btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText.Substring((7 + choiceText.Split()[1].Length + 2), choiceText.Length - (7 + choiceText.Split()[1].Length + 2));
+        else if (choiceText.Split()[0].Equals("_QUESTCONTINUE_"))
+            btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText.Substring((15 + choiceText.Split()[1].Length + 2), choiceText.Length - (15 + choiceText.Split()[1].Length + 2));
+        else if (choiceText.Split()[0].Equals("_QUESTDONE_"))
+            btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText.Substring((11 + choiceText.Split()[1].Length + 2), choiceText.Length - (11 + choiceText.Split()[1].Length + 2));
         else
             btn.transform.GetChild(0).gameObject.GetComponent<Text>().text = choiceText;
         btn.name = choiceText;
@@ -131,10 +186,40 @@ public class DialogueManager : MonoBehaviour
             CafeForCooking.ChooseCafe = cafe;
             SceneManager.LoadScene("FightScene");
         }
+        else if (choice.text.Split()[0].Equals("_QUEST_"))
+        {
+            Quest quest_ = Resources.LoadAll<Quest>("ScriptObj/Quests").FirstOrDefault(i => i.name.Equals(choice.text.Split()[1]));
+
+            InventoryObj inventoryObj = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj;
+            if (!inventoryObj.quests.Find(i => i.name.Equals(quest_.name)))
+            {
+                quest_.isTaken = true;
+                quest_.isCompleted = false;
+                inventoryObj.quests.Add(quest_);
+                SaveQuest();
+            }
+        }
+        else if (choice.text.Split()[0].Equals("_QUESTCONTINUE_"))
+        {
+            Quest quest_ = Resources.LoadAll<Quest>("ScriptObj/Quests").FirstOrDefault(i => i.name.Equals(choice.text.Split()[1]));
+            questSystem.QuestContinue(quest_);
+            SaveQuest();
+        }
+        else if (choice.text.Split()[0].Equals("_QUESTDONE_"))
+        {
+            Quest quest_ = Resources.LoadAll<Quest>("ScriptObj/Quests").FirstOrDefault(i => i.name.Equals(choice.text.Split()[1]));
+            questSystem.EndQuest(quest_);
+            quest_.isCompleted = true;
+            questSystem.Reward(quest_);
+
+            SaveQuest();
+        }
 
         story.ChooseChoiceIndex(choice.index);
         RefreshView();
     }
+
+
     void RemoveChoice()
     {
         foreach (var i in GameObject.FindGameObjectsWithTag("ChoiceButtonDialogue"))
@@ -146,6 +231,13 @@ public class DialogueManager : MonoBehaviour
     public static DialogueManager GetInstance()
     {
         return instance;
+    }
+
+    private void SaveQuest()
+    {
+        GameObject player = GameObject.Find("MainCharacter");
+        AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
+        BinarySavingSystem.SavePlayer(inventory, player);
     }
 }
 

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ebc81800a2b043b7f2802088627db, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: 
-  Title: Egg
+  TitleEng: Egg
+  TitleRus: "\u042F\u0439\u0446\u043E"
   itemArt: {fileID: 21300000, guid: 26df4394cb5d1364996000a1aab90b83, type: 3}

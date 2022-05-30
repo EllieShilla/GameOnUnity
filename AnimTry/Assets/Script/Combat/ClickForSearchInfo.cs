@@ -32,11 +32,15 @@ public class ClickForSearchInfo : MonoBehaviour, IPointerClickHandler
 
         }
 
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+
+
         foreach (var item in stateMachine.foodOrders)
         {
             if (item.visitor.Equals(gameObject.name))
                 foreach (Food food in item.foodList)
-                    ShowOrder.foodName.Add(food.foodName);
+                    ShowOrder.foodName.Add(textVariantLanguage.FoodNameLocalization(food));
+                    //ShowOrder.foodName.Add(food.foodName);
 
         }
 

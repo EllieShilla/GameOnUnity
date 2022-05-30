@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: LemonCharacter
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Lemon Girl
+    heroNameEng: Betty
+    heroNameRus: "\u0411\u0435\u0442\u0442\u0438"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: f53270b4041bac347a191d12b1f03b71, type: 3}
   inCommand: 0
   foods: []

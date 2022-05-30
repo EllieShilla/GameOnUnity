@@ -12,8 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff45f81d3136c48b08abd24d2ecfd4, type: 3}
   m_Name: Egg
   m_EditorClassIdentifier: 
-  foodName: Egg
-  description: Fried egg
+  foodName_ENG: Fried egg
+  foodName_RUS: "\u0416\u0430\u0440\u0435\u043D\u043E\u0435 \u044F\u0439\u0446\u043E"
+  description_ENG: Fried egg.
+  description_RUS: "\u0416\u0430\u0440\u0435\u043D\u043D\u043E\u0435 \u044F\u0439\u0446\u043E."
   foodArt: {fileID: 21300000, guid: 25dadc9063e9113418dbea06ef1bf197, type: 3}
   fullness: 1
   taste: 1

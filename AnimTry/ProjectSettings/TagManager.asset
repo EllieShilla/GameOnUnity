@@ -18,6 +18,7 @@ TagManager:
   - IngridientInInventoryPanel
   - MenuItem
   - ItemForCreate
+  - QuestListInInventory
   layers:
   - Default
   - TransparentFX

@@ -204,7 +204,7 @@ public class EnemyStateMachine : MonoBehaviour
 
         if (heroState.baseHeroero.currentPressure == heroState.baseHeroero.Pressure)
         {
-            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.FindIndex(z => z.GetComponent<HeroStateMaschine>().baseHeroero.heroName.Equals(heroState.baseHeroero.heroName)));
+            stateMachine.FighterList.RemoveAt(stateMachine.FighterList.FindIndex(z => z.GetComponent<HeroStateMaschine>().baseHeroero.heroNameEng.Equals(heroState.baseHeroero.heroNameEng)));
         }
 
         int countPreassureMin = 0;

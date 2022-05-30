@@ -95,7 +95,7 @@ public class SaveScript : MonoBehaviour
     {
         GameObject player = GameObject.Find("MainCharacter");
         AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
-        BinarySavingSystem.SavePlayerBook(inventory, player);
+        BinarySavingSystem.SavePlayer(inventory, player);
 
         gameData = GetComponent<GameData>();
         savePath = Application.persistentDataPath + "/gamesave.save";

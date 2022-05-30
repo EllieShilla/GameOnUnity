@@ -38,13 +38,14 @@ public class InDinnerScene : MonoBehaviour
     {
         if (playerInRange)
         {
-            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = "Entry";
+            TextVariantLanguageInteractivePanel textVariantLanguage = new TextVariantLanguageInteractivePanel();
+            IntoPanel.transform.GetChild(1).transform.GetChild(0).transform.GetChild(0).GetComponent<Text>().text = textVariantLanguage.PanelToDinnerScene();
 
             if (Input.GetKeyDown(KeyCode.E))
             {
                 IntoPanel.SetActive(false);
                 playerInRange = false;
-                SaveScript.saveData = true;
+
                 SceneManager.LoadScene(IntoTitle);
             }
         }

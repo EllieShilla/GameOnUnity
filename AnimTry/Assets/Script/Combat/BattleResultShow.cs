@@ -33,10 +33,7 @@ public class BattleResultShow : MonoBehaviour
 
     public void CloseScene()
     {
-        //SaveScriptBeforeFight ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
-
-        //if (GoodEnd)
-        //    ReturnFromFightScene.SaveData();
+        SaveScriptBeforeFight ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
 
         ReturnFromFightScene.SceneLoad();
         SceneManager.UnloadSceneAsync("FightScene");

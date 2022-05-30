@@ -12,7 +12,6 @@ public class BuyIngridient : MonoBehaviour
     List<Ingridient> ingridients;
     void Start()
     {
-        //player = GameObject.Find("Standing W_Briefcase Idle").GetComponent<Player>();
         inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
         panel = GameObject.Find("ShopPanel");
         ingridients = new List<Ingridient>();
@@ -30,12 +29,13 @@ public class BuyIngridient : MonoBehaviour
     void Buy(Transform ingridientPanel, AddInventoryToObj addInventory, GameObject panelFormMoney)
     {
         int money = int.Parse(ingridientPanel.GetChild(2).GetComponent<Text>().text);
-        string ingTitle = ingridientPanel.GetChild(1).GetComponent<Text>().text;
-
+        //string ingTitle = ingridientPanel.GetChild(1).GetComponent<Text>().text;
+        string ingTitle = ingridientPanel.name.Split('_')[0];
+        
         if (inventory.inventoryObj.money >= money)
         {
             inventory.inventoryObj.money -= money;
-            inventory.inventoryObj.ingridients.Add(ingridients.Find(ing => ing.Title == ingTitle));
+            inventory.inventoryObj.ingridients.Add(ingridients.Find(ing => ing.name == ingTitle));
             panelFormMoney.transform.GetChild(2).GetChild(0).GetComponent<Text>().text = inventory.inventoryObj.money.ToString();
         }
     }

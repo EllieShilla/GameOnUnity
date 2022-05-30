@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: RestaurantCriticFriend
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Little Spotter
+    heroNameEng: Little Spotter
+    heroNameRus: "\u041C\u0430\u043B\u0435\u043D\u044C\u043A\u0438\u0439 \u0441\u044B\u0449\u0438\u043A"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: 95babdd52d947494db3c60066e69e987, type: 3}
   inCommand: 0
   foods: []

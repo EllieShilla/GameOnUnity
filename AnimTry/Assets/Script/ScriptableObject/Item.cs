@@ -6,8 +6,10 @@ using UnityEngine;
 public class Item : ScriptableObject
 {
     public int id;
-    public string itemName;
-    public string description;
+    public string itemName_ENG;
+    public string itemName_RU;
+    public string description_ENG;
+    public string description_RU;
     public Sprite itemArt;
 
     public enum Type

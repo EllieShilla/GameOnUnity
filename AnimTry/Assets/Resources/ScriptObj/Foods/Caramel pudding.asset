@@ -12,8 +12,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff45f81d3136c48b08abd24d2ecfd4, type: 3}
   m_Name: Caramel pudding
   m_EditorClassIdentifier: 
-  foodName: Caramel pudding
-  description: Just eggs, sugar and milk, but what a taste.
+  foodName_ENG: Caramel pudding
+  foodName_RUS: "\u041A\u0430\u0440\u0430\u043C\u0435\u043B\u044C\u043D\u044B\u0439
+    \u043F\u0443\u0434\u0438\u043D\u0433"
+  description_ENG: Just eggs, sugar and milk, but what a taste.
+  description_RUS: "\u0422\u043E\u043B\u044C\u043A\u043E \u044F\u0439\u0446\u0430,
+    \u0441\u0430\u0445\u0430\u0440 \u0438 \u043C\u043E\u043B\u043E\u043A\u043E, \u043D\u043E
+    \u043A\u0430\u043A\u043E\u0439 \u0432\u043A\u0443\u0441."
   foodArt: {fileID: 21300000, guid: c4c11d674713a9c4d80a5175377a8336, type: 3}
   fullness: 4
   taste: 6

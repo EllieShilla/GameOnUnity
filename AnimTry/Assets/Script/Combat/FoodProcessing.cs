@@ -21,6 +21,7 @@ public class FoodProcessing : MonoBehaviour
     //выбор блюда для подачи
     public IEnumerator ChoiceFood(string foodName)
     {
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
 
         if (GameObject.Find(ClickForSearchInfo.nameVisitor) != null)
         {
@@ -34,7 +35,8 @@ public class FoodProcessing : MonoBehaviour
                 {
                     //если в заказе находится выбраное игроком блюдо, оно удалится из заказа
                     foreach (var i in item.foodList)
-                        if (i.foodName.Equals(foodName))
+                        //if (i.foodName.Equals(foodName))
+                        if (textVariantLanguage.FoodNameLocalization(i).Equals(foodName))
                         {
                             MiniGame.stopCook = false;
                             MiniGame.goodCook = false;
@@ -88,7 +90,8 @@ public class FoodProcessing : MonoBehaviour
                     {
                         if (item.visitor.Equals(ClickForSearchInfo.nameVisitor))
                             foreach (Food food in item.foodList)
-                                ShowOrder.foodName.Add(food.foodName);
+                                ShowOrder.foodName.Add(textVariantLanguage.FoodNameLocalization(food));
+                                //ShowOrder.foodName.Add(food.foodName);
 
                     }
                 }

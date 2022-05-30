@@ -25,6 +25,7 @@ public class ShowFoodList : MonoBehaviour
     {
         if (workDrawFood)
         {
+            TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
             HeroStateMaschine heroState = stateMachine.FighterList[0].GetComponent<HeroStateMaschine>();
 
             if (confectionerFoodList != null)
@@ -35,16 +36,17 @@ public class ShowFoodList : MonoBehaviour
                     GameObject foodPanel = panelList;
 
                     GameObject foodName = foodPanel.transform.GetChild(2).gameObject;
-                    foodName.GetComponent<Text>().text = food.typeOfFood+": "+food.skill.ToString();
+                    foodName.GetComponent<Text>().text = textVariantLanguage.FoodTypeLocalization(food) + food.skill.ToString();
 
                     GameObject aboutFood = foodPanel.transform.GetChild(1).gameObject;
-                    aboutFood.GetComponent<Text>().text = food.foodName;
+                    aboutFood.GetComponent<Text>().text = textVariantLanguage.FoodNameLocalization(food);
 
                     GameObject icon = foodPanel.transform.GetChild(0).gameObject;
                     icon.GetComponent<Image>().sprite = food.foodArt;
 
                     Button b = foodPanel.transform.GetChild(3).gameObject.GetComponent<Button>();
-                    b.name = food.foodName;
+                    //b.name = food.foodName_ENG;
+                    b.name = textVariantLanguage.FoodNameLocalization(food);
 
 
                     var newFoodPlane = Instantiate(foodPanel, new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
@@ -53,7 +55,8 @@ public class ShowFoodList : MonoBehaviour
 
 
                     //поиск кнопки на каждом из блюд и создание onClick
-                    Button btn = GameObject.Find(food.foodName).GetComponent<Button>();
+                    //Button btn = GameObject.Find(food.foodName_ENG).GetComponent<Button>();
+                    Button btn = GameObject.Find(textVariantLanguage.FoodNameLocalization(food)).GetComponent<Button>();
                     btn.onClick.RemoveAllListeners();
                     btn.onClick.AddListener(delegate { StartCoroutine( foodProcessing.ChoiceFood(btn.name)); });
 

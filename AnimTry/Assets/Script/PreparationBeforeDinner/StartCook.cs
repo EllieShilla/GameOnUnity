@@ -17,8 +17,6 @@ public class StartCook : MonoBehaviour
     int count = 0;
     PositionCharacter position = new PositionCharacter();
 
-
-
     public void StartCooking()
     {
         HeroPlacement.SetActive(false);
@@ -32,20 +30,20 @@ public class StartCook : MonoBehaviour
         createVisitor.NewVisitors();
 
         SetCharacters();
-
     }
 
     //создание и добавление выбранных персонажей на сцену и привязка к ним панелей с информацией
     void SetCharacters()
     {
         count = 0;
+        TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
 
         foreach (var item in team)
         {
             item.baseHero.currentReturn = item.baseHero.Return;
 
             GameObject characterPanel = CharacterPanel;
-            characterPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = item.baseHero.heroName;
+            characterPanel.transform.GetChild(1).gameObject.GetComponent<Text>().text = textVariantLanguage.HeroNameLocalization(item.baseHero);
             GameObject detailInfo = characterPanel.transform.GetChild(8).gameObject;
             detailInfo.transform.GetChild(0).GetComponent<Text>().text = item.baseHero.currentPressure+"/"+item.baseHero.Pressure;
             detailInfo.transform.GetChild(1).GetComponent<Text>().text = item.baseHero.currentStamina+"/"+item.baseHero.stamina;
@@ -76,7 +74,7 @@ public class StartCook : MonoBehaviour
             heroStateMaschineChar.CharacterInformPanel = charPlane;
 
             character.transform.tag = "Character";
-            character.transform.name = item.baseHero.heroName;
+            character.transform.name = item.baseHero.heroNameEng;
             Animator animator= character.GetComponent<Animator>();
             animator.SetBool("IsFight",true);
 

@@ -13,9 +13,16 @@ MonoBehaviour:
   m_Name: Cup of tea
   m_EditorClassIdentifier: 
   id: 2
-  itemName: Camomile tea
-  description: A hot cup of chamomile tea will calm your nerves and put you in a
-    good mood for work
+  itemName_ENG: Camomile tea
+  itemName_RU: "\u0420\u043E\u043C\u0430\u0448\u043A\u043E\u0432\u044B\u0439 \u0447\u0430\u0439"
+  description_ENG: A hot cup of chamomile tea will calm your nerves and put you in
+    a good mood for work.
+  description_RU: "\u0413\u043E\u0440\u044F\u0447\u0430\u044F \u0447\u0430\u0448\u043A\u0430
+    \u0440\u043E\u043C\u0430\u0448\u043A\u043E\u0432\u043E\u0433\u043E \u0447\u0430\u044F
+    \u0443\u0441\u043F\u043E\u043A\u043E\u0438\u0442 \u043D\u0435\u0440\u0432\u044B
+    \u0438 \u0441\u043E\u0437\u0434\u0430\u0441\u0442 \u0445\u043E\u0440\u043E\u0448\u0435\u0435
+    \u043D\u0430\u0441\u0442\u0440\u043E\u0435\u043D\u0438\u0435 \u0434\u043B\u044F
+    \u0440\u0430\u0431\u043E\u0442\u044B."
   itemArt: {fileID: 21300000, guid: 45bfc333de3a73c4b9de1975c2c07d1a, type: 3}
   type: 1
   amount_of_recovery: 3

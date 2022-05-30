@@ -5,7 +5,8 @@ using UnityEngine;
 [CreateAssetMenu(fileName = "New Book", menuName = "Book")]
 public class BooksWithStats : ScriptableObject
 {
-    public string BookTitle;
+   public string BookTitle_ENG;
+   public string BookTitle_RUS;
    public enum TypeOfStat
     {
         Confectioner,

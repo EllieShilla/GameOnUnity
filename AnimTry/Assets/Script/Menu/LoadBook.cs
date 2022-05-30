@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using UnityEngine;
 
@@ -8,7 +9,14 @@ public class LoadBook : MonoBehaviour
 {
     private void Start()
     {
-        LoadBooksOnScene();
+        if (File.Exists(Application.persistentDataPath + "/data.save"))
+        {
+            //GameObject player = GameObject.Find("MainCharacter");
+            //AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
+            //BinarySavingSystem.SavePlayer(inventory, player);
+
+            LoadBooksOnScene();
+        }
     }
 
     public static void LoadBooksOnScene()
@@ -27,6 +35,7 @@ public class LoadBook : MonoBehaviour
                     if (bookName != null)
                     {
                         BooksWithStats bookObj = GameObject.Find(bookName.Split('_')[0]).GetComponent<ItemToInventory>().book;
+                        //Resources.LoadAll<BooksWithStats>("ScriptObj/BooksWithStats").FirstOrDefault(y => y.name.Split('_')[0].Equals(GameObject.Find("Books").transform.GetChild(i).name)).isLoot = Convert.ToBoolean(bookName.Split('_')[1]);
                         bookObj.isLoot = Convert.ToBoolean(bookName.Split('_')[1]);
                     }
                 }

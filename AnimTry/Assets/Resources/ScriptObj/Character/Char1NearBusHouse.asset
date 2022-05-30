@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Char1NearBusHouse
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Sport Girl
+    heroNameEng: Sport Girl
+    heroNameRus: "\u0421\u043F\u043E\u0440\u0442\u0438\u0432\u043D\u0430\u044F \u0434\u0435\u0432\u0443\u0448\u043A\u0430"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: ed9c7fc0ff3d6b24781e8f72a3f21670, type: 3}
   inCommand: 0
   foods: []

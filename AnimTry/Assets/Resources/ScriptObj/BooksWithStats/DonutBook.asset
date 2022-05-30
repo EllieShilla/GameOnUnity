@@ -12,6 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 03194ecd12ce4f2408a66d4855cb0aec, type: 3}
   m_Name: DonutBook
   m_EditorClassIdentifier: 
-  BookTitle: 'History of donuts: from the ancient wheel to the present day'
+  BookTitle_ENG: 'History of donuts: from the ancient wheel to the present day.'
+  BookTitle_RUS: "\u0418\u0441\u0442\u043E\u0440\u0438\u044F \u043F\u043E\u043D\u0447\u0438\u043A\u043E\u0432:
+    \u043E\u0442 \u0434\u0440\u0435\u0432\u043D\u0435\u0433\u043E \u043A\u043E\u043B\u0435\u0441\u0430
+    \u0434\u043E \u043D\u0430\u0448\u0438\u0445 \u0434\u043D\u0435\u0439."
   type: 0
   count: 1
+  isLoot: 0

@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 428ebc81800a2b043b7f2802088627db, type: 3}
   m_Name: Mint
   m_EditorClassIdentifier: 
-  Title: Mint
+  TitleEng: Mint
+  TitleRus: "\u041C\u044F\u0442\u0430"
   itemArt: {fileID: 21300000, guid: 8f4b9398eda9295408ddc8a8104cbc87, type: 3}

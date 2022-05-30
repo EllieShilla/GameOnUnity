@@ -9,4 +9,6 @@ public class InventoryObj : ScriptableObject
     public List<Ingridient> ingridients;
     public int money;
     public List<Character> group;
+    public List<Quest> quests;
+    public List<string> questPhrases;
 }

@@ -8,6 +8,7 @@ public class FromScene : MonoBehaviour
     public static bool fromSampleScene = false;
     public static bool isMenuActive = false;
     public static bool isContinue = false;
-    public static bool isFirstOpen = true;
-
+    //public static bool isFirstOpen = true;
+    public static bool isFirstOpen = false;
+    public static Vector3 loadPosition;
 }

@@ -1,0 +1,56 @@
+Key,English,Russian
+Menu.NewGame,NEW GAME,НОВАЯ ИГРА
+Menu.Resume,RESUME,ПРОДОЛЖИТЬ
+Menu.LoadGame,LOAD GAME,ЗАГРУЗКА
+Menu.SaveGame,SAVE GAME,СОХРАНИТЬ
+Menu.Options,OPTIONS,НАСТРОЙКИ
+Menu.Exit,EXIT,ВЫХОД
+Menu.Credits,CREDITS,ТИТРЫ
+Menu.Back,BACK,НАЗАД
+Menu.Yes,Yes,Да
+Menu.No,No,Нет
+Menu.SaveBefore,Save data before closing?,Сохранить данные перед закрытием?
+Menu.KeyBinding,"
+Movement - Up
+
+
+Movement - Down
+
+
+Movement - Left
+
+
+Movement - Right
+
+
+Sprint
+
+
+Open inventory
+
+
+Stop a running slider during a mini-game fight
+","Движение - Вверх
+
+
+Движение - Вниз
+
+
+Движение - Влево
+
+
+Движение - Вправо
+
+
+Спринт
+
+
+Открыть инвентарь
+
+
+Остановить бегающий ползунок во время боя в мини игре"
+Menu.KeyBindings,KEY BINDINGS,УПРАВЛЕНИЕ
+Menu.Localization,LANGUAGE,ЯЗЫК
+Menu.English,ENGLISH,АНГЛИЙСКИЙ
+Menu.Russian,RUSSIAN,РУССКИЙ
+Menu.MainMenu,MAIN MENU,ГЛАВНОЕ МЕНЮ

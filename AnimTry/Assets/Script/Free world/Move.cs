@@ -13,12 +13,18 @@ public class Move : MonoBehaviour
     InventoryController inventoryController;
     public static bool canMove = true;
     [SerializeField]
-    private GameObject Menu;
-    //static bool isMenuActive = false;
+    private GameObject MenuPanel;
+    static bool isMenuActive = false;
+
+    public static void ActiveMenu(bool inform)
+    {
+        isMenuActive = inform;
+    }
     private void Start()
     {
         animator = GetComponent<Animator>();
         inventoryController = new InventoryController();
+        Move.canMove = true;
     }
     private void Update()
     {
@@ -71,32 +77,27 @@ public class Move : MonoBehaviour
         //Open-Close Menu
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (!FromScene.isMenuActive)
+            if (!Move.isMenuActive)
             {
-                FromScene.isMenuActive = true;
+                Move.isMenuActive = true;
             }
             else
             {
-                FromScene.isMenuActive = false;
+                Move.isMenuActive = false;
             }
         }
 
-        if (!FromScene.isMenuActive)
+        if (Move.isMenuActive)
         {
-            Menu.SetActive(true);
+            MenuPanel.SetActive(true);
 
-            Button button = Menu.transform.GetChild(0).transform.GetChild(2).GetComponent<Button>();
-
-            if (SceneManager.GetActiveScene().name.Equals("FightScene"))
-                button.interactable = false;
-            else
-                button.interactable = true;
+            Menu.ActiveMenuButton(MenuPanel);
 
             Time.timeScale = 0f;
         }
         else
         {
-            Menu.SetActive(false);
+            MenuPanel.SetActive(false);
             Time.timeScale = 1f;
         }
 

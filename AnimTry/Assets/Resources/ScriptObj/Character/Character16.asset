@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: Character16
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Girl
+    heroNameEng: Sara
+    heroNameRus: "\u0421\u0430\u0440\u0430"
     Return: 3
     currentReturn: 3
     Pressure: 10

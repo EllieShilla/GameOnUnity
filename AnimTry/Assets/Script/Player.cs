@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 {
     Animator animator;
     public Character character;
+    public Quest quest;
 
     private void Start()
     {

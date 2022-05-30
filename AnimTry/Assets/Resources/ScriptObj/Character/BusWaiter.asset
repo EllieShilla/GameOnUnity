@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: BusWaiter
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Bus Waiter
+    heroNameEng: Sam
+    heroNameRus: "\u0421\u044D\u043C"
     Return: 0
     currentReturn: 0
     Pressure: 0
@@ -23,7 +24,12 @@ MonoBehaviour:
     Confectioner: 0
     ColdShop: 0
     HotShop: 0
-    ChefStationWagon: 0
+    StartReturn: 0
+    StartPressure: 0
+    StartStamina: 0
+    StartConfectioner: 0
+    StartColdShop: 0
+    StartHotShop: 0
   characterPhoto: {fileID: 21300000, guid: 1db049949173f5d4fa757c9a3aa6b5c3, type: 3}
   inCommand: 0
   foods: []

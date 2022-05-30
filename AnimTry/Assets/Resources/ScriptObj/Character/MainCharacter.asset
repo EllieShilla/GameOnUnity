@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: MainCharacter
   m_EditorClassIdentifier: 
   baseHero:
-    heroName: Boy
+    heroNameEng: Boy
+    heroNameRus: "\u041C\u0430\u043B\u044C\u0447\u0438\u043A"
     Return: 5
     currentReturn: 5
     Pressure: 10

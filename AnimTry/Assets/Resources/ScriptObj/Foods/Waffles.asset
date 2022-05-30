@@ -12,8 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 97ff45f81d3136c48b08abd24d2ecfd4, type: 3}
   m_Name: Waffles
   m_EditorClassIdentifier: 
-  foodName: 'Waffles '
-  description: Delicious honey waffles that everyone will love.
+  foodName_ENG: 'Waffles '
+  foodName_RUS: "\u0412\u0430\u0444\u043B\u0438"
+  description_ENG: Delicious honey waffles that everyone will love.
+  description_RUS: "\u0412\u043A\u0443\u0441\u043D\u044B\u0435 \u043C\u0435\u0434\u043E\u0432\u044B\u0435
+    \u0432\u0430\u0444\u043B\u0438, \u043A\u043E\u0442\u043E\u0440\u044B\u0435 \u043F\u043E\u043D\u0440\u0430\u0432\u044F\u0442\u0441\u044F
+    \u0432\u0441\u0435\u043C."
   foodArt: {fileID: 21300000, guid: 6f4cbe5fec443d14a92a9af930d3ec2d, type: 3}
   fullness: 3
   taste: 6
