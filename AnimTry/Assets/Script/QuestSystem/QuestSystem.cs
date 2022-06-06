@@ -16,7 +16,7 @@ public class QuestSystem : MonoBehaviour
 
         switch (quest.dataTypeGoal)
         {
-            case "int":
+            case Quest.TypeGoal.IntType:
                 {
 
                     intData = new int[quest.goals.Length];
@@ -32,7 +32,7 @@ public class QuestSystem : MonoBehaviour
                             allHave = false;
                     }
                 }break;
-            case "string":
+            case Quest.TypeGoal.StringIntType:
                 {
                     if(inventory.questPhrases.FirstOrDefault(i=>i.Equals(quest.goals[0].stringData))!=null)
                         allHave = true;
@@ -40,7 +40,7 @@ public class QuestSystem : MonoBehaviour
                         allHave = false;
                 }
                 break;
-            case "Item":
+            case Quest.TypeGoal.ItemType:
                 {
                     itemDictionary = new Dictionary<Item, int>();
 
@@ -64,7 +64,7 @@ public class QuestSystem : MonoBehaviour
                     }
                 }
                 break;
-            case "Ingridient":
+            case Quest.TypeGoal.IngridientType:
                 {
                     ingridientDictionary = new Dictionary<Ingridient, int>();
 
@@ -103,19 +103,19 @@ public class QuestSystem : MonoBehaviour
 
         switch (quest.dataTypeGoal)
         {
-            case "int":
+            case Quest.TypeGoal.IntType:
                 {
                     inventory.money -= intData[0];
                 }
                 break;
-            case "string":
+            case Quest.TypeGoal.StringIntType:
                 {
                     int index = inventory.questPhrases.FindIndex(i => i.Equals(quest.goals[0].stringData));
                     inventory.questPhrases.RemoveAt(index);
 
                 }
                 break;
-            case "Item":
+            case Quest.TypeGoal.ItemType:
                 {
                     foreach (var item in itemDictionary.Keys.ToList())
                     {
@@ -130,7 +130,7 @@ public class QuestSystem : MonoBehaviour
                     }
                 }
                 break;
-            case "Ingridient":
+            case Quest.TypeGoal.IngridientType:
                 {
                     foreach (var item in ingridientDictionary.Keys.ToList())
                     {
@@ -155,12 +155,12 @@ public class QuestSystem : MonoBehaviour
 
         switch (quest.dataTypeRewards)
         {
-            case "money":
+            case Quest.TypeRewards.Money:
                 {
                     inventory.money += quest.rewards[0].money;
                 }
                 break;
-            case "ColdShop":
+            case Quest.TypeRewards.ColdShop:
                 {
                         foreach(Character group in inventory.group)
                         {
@@ -168,7 +168,7 @@ public class QuestSystem : MonoBehaviour
                         }
                 }
                 break;
-            case "HotShop":
+            case Quest.TypeRewards.HotShop:
                 {
 
                         foreach (Character group in inventory.group)
@@ -177,7 +177,7 @@ public class QuestSystem : MonoBehaviour
                         }
                 }
                 break;
-            case "Confectioner":
+            case Quest.TypeRewards.Confectioner:
                 {
                         foreach (Character group in inventory.group)
                         {
@@ -185,7 +185,7 @@ public class QuestSystem : MonoBehaviour
                         }
                 }
                 break;
-            case "itemData":
+            case Quest.TypeRewards.itemData:
                 {
                     foreach(var item in quest.rewards)
                     {
@@ -193,7 +193,7 @@ public class QuestSystem : MonoBehaviour
                     }
                 }
                 break;
-            case "ingridientData":
+            case Quest.TypeRewards.ingridientData:
                 {
                     foreach (var item in quest.rewards)
                     {
@@ -201,7 +201,12 @@ public class QuestSystem : MonoBehaviour
                     }
                 }
                 break;
-            case "message":
+            case Quest.TypeRewards.message:
+                {
+
+                }
+                break;
+            case Quest.TypeRewards.none:
                 {
 
                 }

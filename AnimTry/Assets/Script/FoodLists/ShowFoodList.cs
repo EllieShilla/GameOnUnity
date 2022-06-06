@@ -25,7 +25,7 @@ public class ShowFoodList : MonoBehaviour
     {
         if (workDrawFood)
         {
-            TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();
+            TextVariantLanguageScriptObject textVariantLanguage = new TextVariantLanguageScriptObject();   
             HeroStateMaschine heroState = stateMachine.FighterList[0].GetComponent<HeroStateMaschine>();
 
             if (confectionerFoodList != null)

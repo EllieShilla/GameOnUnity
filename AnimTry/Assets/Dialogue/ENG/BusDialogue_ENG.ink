@@ -4,7 +4,7 @@ When will he arrive... Oh, hello!
 [MainCharacter]
 Did something happen?
 [BusWaiter]
-The bus is late. And today is the last day of the fair. And I wanted so badly to go, and here we are.
+The bus is late. And today is the last day of the fair. And I wanted so badly to get to it, and here we are.
 [MainCharacter]
 Today is the last day? I thought it would last another week.
 [BusWaiter]

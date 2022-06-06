@@ -18,7 +18,11 @@ public class PlayerData
     public string[][] quests;
     public string[] booksName;
     public string[] questPhrases;
-    
+
+    //public bool StartQuestResult;
+    public string[][] chests;
+    public string[][] LearnDialogue;
+
     public PlayerData(AddInventoryToObj inventory, GameObject player)
     {
         money = inventory.inventoryObj.money;
@@ -38,6 +42,8 @@ public class PlayerData
         quests = new string[inventory.inventoryObj.quests.Count][];
         booksName = new string[Resources.LoadAll<BooksWithStats>("ScriptObj/BooksWithStats").Length];
         questPhrases = new string[inventory.inventoryObj.questPhrases.Count];
+        chests=new string[Resources.LoadAll<Chest>("ScriptObj/Chests").Length][];
+        LearnDialogue = new string[LearnDialogBool.dialogueInfo.Length][];
 
         for (int i = 0; i < inventory.inventoryObj.items.Count; i++)
             itemNames[i] = inventory.inventoryObj.items[i].name;
@@ -65,6 +71,7 @@ public class PlayerData
             BooksWithStats book = Resources.LoadAll<BooksWithStats>("ScriptObj/BooksWithStats")[i];
             booksName[i] = book.name + "_" + book.isLoot.ToString();
         }
+
         for (int i = 0; i < inventory.inventoryObj.quests.Count; i++)
         {
             quests[i] = new string[3];
@@ -73,8 +80,19 @@ public class PlayerData
             quests[i][2] = inventory.inventoryObj.quests[i].isCompleted.ToString();
         }
 
+        for (int i = 0; i < chests.Length; i++)
+        {
+            Chest chest = Resources.LoadAll<Chest>("ScriptObj/Chests")[i];
+
+            chests[i] = new string[2];
+            chests[i][0] = chest.name;
+            chests[i][1] = chest.isClear.ToString();
+        }
+
         for (int i = 0; i < inventory.inventoryObj.questPhrases.Count; i++)
             questPhrases[i] = inventory.inventoryObj.questPhrases[i];
+
+        LearnDialogue = LearnDialogBool.dialogueInfo;
     }
 
     public PlayerData()
@@ -108,6 +126,7 @@ public class PlayerData
         itemNames = new string[0] { };
         ingridients = new string[0] { };
         quests = new string[0][] { };
+        chests = new string[0][] { };
 
         int lenth = Resources.LoadAll<Quest>("ScriptObj/Quests").Length;
 
@@ -117,14 +136,16 @@ public class PlayerData
             Resources.LoadAll<Quest>("ScriptObj/Quests")[i].isCompleted = false;
         }
 
-        //foreach (Quest quest_ in Resources.LoadAll<Quest>("ScriptObj/Quests") as Quest[])
-        //{
-        //    quest_.isTaken = false;
-        //    quest_.isCompleted = false;
-        //}
+        for (int i = 0; i < Resources.LoadAll<Chest>("ScriptObj/Chests").Length; i++)
+        {
+            Resources.LoadAll<Chest>("ScriptObj/Chests")[i].isClear = false;
+        }
 
-        questPhrases=new string[0] { };
+        questPhrases =new string[0] { };
+        //StartQuestResult = LastQuest.isShopPanel;
 
+        LearnDialogue = new string[LearnDialogBool.dialogueInfo.Length][];
+        LearnDialogue = LearnDialogBool.dialogueInfo;
     }
 }
 

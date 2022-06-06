@@ -4,10 +4,8 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class BattleResultShow : MonoBehaviour
+public class BattleResultShow : MonoBehaviour  //вывод панели с результатами
 {
-    // Start is called before the first frame update
-
     public static bool GoodEnd = false;
     public static bool EndBattle = false;
     SaveScriptBeforeFight ReturnFromFightScene;
@@ -33,6 +31,8 @@ public class BattleResultShow : MonoBehaviour
 
     public void CloseScene()
     {
+        ShowFoodList.workDrawFood = false;
+
         SaveScriptBeforeFight ReturnFromFightScene = GameObject.Find("ReturnFromFightScene").GetComponent<SaveScriptBeforeFight>();
 
         ReturnFromFightScene.SceneLoad();

@@ -16,6 +16,7 @@ public class LoadBook : MonoBehaviour
             //BinarySavingSystem.SavePlayer(inventory, player);
 
             LoadBooksOnScene();
+            LoadChests();
         }
     }
 
@@ -55,5 +56,26 @@ public class LoadBook : MonoBehaviour
             }
         }
     }
+
+    void LoadChests()
+    {
+        PlayerData data = BinarySavingSystem.LoadPlayer();
+
+        if (data.chests != null)
+        {
+            if (GameObject.FindGameObjectWithTag("Chests"))
+            {
+                GameObject chestObj = GameObject.FindGameObjectWithTag("Chests");
+
+                string[] chest = data.chests.FirstOrDefault(y => y[0].Equals(chestObj.GetComponent<WorkWithChests>().chest.name));
+
+                if (chest != null)
+                {
+                    Resources.LoadAll<Chest>("ScriptObj/Chests").FirstOrDefault(y => y.name.Equals(chest[0])).isClear = Convert.ToBoolean(chest[1]);
+                }
+            }
+        }
+    }
 }
+
 

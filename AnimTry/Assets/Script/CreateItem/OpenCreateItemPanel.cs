@@ -39,6 +39,8 @@ public class OpenCreateItemPanel : MonoBehaviour
 
             if (Input.GetKeyDown(KeyCode.E))
             {
+                this.gameObject.transform.GetChild(0).gameObject.SetActive(true);
+
                 InteractivePanel.SetActive(false);
                 ItemPanelVisible = true;
                 CanvasPanel.SetActive(true);

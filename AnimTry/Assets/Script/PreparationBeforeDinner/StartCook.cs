@@ -9,6 +9,7 @@ public class StartCook : MonoBehaviour
     [SerializeField] private GameObject GridForCharacterPanel;
     [SerializeField] private GameObject CharacterPanel;
     [SerializeField] private GameObject Inventory;
+    [SerializeField] private GameObject NextStepButton;
 
     public static Character coldShopCook;
     public static Character hotShopCook;
@@ -16,6 +17,17 @@ public class StartCook : MonoBehaviour
 
     int count = 0;
     PositionCharacter position = new PositionCharacter();
+
+
+    private void Update()
+    {
+        //если невыбрано двух персонажей кнопка старт будет неактивна
+        if (coldShopCook == null || hotShopCook == null)
+            gameObject.GetComponent<Button>().interactable=false;
+        else 
+            gameObject.GetComponent<Button>().interactable = true;
+
+    }
 
     public void StartCooking()
     {
@@ -30,6 +42,7 @@ public class StartCook : MonoBehaviour
         createVisitor.NewVisitors();
 
         SetCharacters();
+        NextStepButton.SetActive(true);
     }
 
     //создание и добавление выбранных персонажей на сцену и привязка к ним панелей с информацией
@@ -56,6 +69,10 @@ public class StartCook : MonoBehaviour
             Vector3 vector3 = new Vector3(position.GetPositions()[count].X, item.positionY, position.GetPositions()[count].Z);
             GameObject character = Instantiate(item.character, vector3, Quaternion.identity) as GameObject;
             character.transform.Rotate(0, position.GetPositions()[count].rotation_Y, 0);
+
+            if (character.GetComponent<Move>()){
+                character.GetComponent<Move>().enabled = false;
+            }
 
             HeroStateMaschine heroStateMaschineChar = character.GetComponent<HeroStateMaschine>();
 
@@ -88,7 +105,5 @@ public class StartCook : MonoBehaviour
             item.SetActive(true);
 
         BattleStateMachine.starting = true;
-
     }
 }
-

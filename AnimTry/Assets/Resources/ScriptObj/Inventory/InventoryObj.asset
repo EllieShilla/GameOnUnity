@@ -12,20 +12,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3467acbd963aa264e950f5351bae2092, type: 3}
   m_Name: InventoryObj
   m_EditorClassIdentifier: 
-  items:
-  - {fileID: 11400000, guid: b2951d7c023fe6a4fad93f3478a333ec, type: 2}
-  - {fileID: 11400000, guid: 1c7f65e2cc1b20f4ea451364240c51df, type: 2}
-  - {fileID: 11400000, guid: 8c4632d2344d732409b6b9c8e724d24b, type: 2}
+  items: []
   ingridients:
-  - {fileID: 11400000, guid: 1a992eb79208f7b459d7df1f4d0a1960, type: 2}
-  - {fileID: 11400000, guid: 1a992eb79208f7b459d7df1f4d0a1960, type: 2}
-  money: 114
+  - {fileID: 11400000, guid: 73480bb75feea6245bd311a98aec3a69, type: 2}
+  - {fileID: 11400000, guid: 8e82851cfc22a9448b9ebdb51e339370, type: 2}
+  - {fileID: 11400000, guid: 92c63fdd1f018004eb58b5259e6dba9e, type: 2}
+  money: 100
   group:
   - {fileID: 11400000, guid: fdf6a58e3216e274bb34fb2dfda80b28, type: 2}
   - {fileID: 11400000, guid: c66470568582dd34fb8a16bac47029d0, type: 2}
   - {fileID: 11400000, guid: 7db8226be1144ca41b4c30367619cb11, type: 2}
   quests:
   - {fileID: 11400000, guid: f0412b4fac7cd3f48b261a382ebc573e, type: 2}
-  - {fileID: 11400000, guid: a442c4213295e0f448db8de9efd8dffe, type: 2}
   questPhrases:
   - TripToTheFair

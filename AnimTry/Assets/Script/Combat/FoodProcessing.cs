@@ -7,8 +7,6 @@ using System.Threading;
 
 public class FoodProcessing : MonoBehaviour
 {
-    // Start is called before the first frame update
-
     private BattleStateMachine stateMachine;
     private bool isDish = false;
     GameObject PanelMiniGameWithCook;
@@ -27,15 +25,13 @@ public class FoodProcessing : MonoBehaviour
         {
             stateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
 
-            StaminaChange();
-
             foreach (var item in stateMachine.foodOrders)
             {
                 if (item.visitor.Equals(ClickForSearchInfo.nameVisitor))
                 {
                     //если в заказе находится выбраное игроком блюдо, оно удалится из заказа
                     foreach (var i in item.foodList)
-                        //if (i.foodName.Equals(foodName))
+
                         if (textVariantLanguage.FoodNameLocalization(i).Equals(foodName))
                         {
                             MiniGame.stopCook = false;
@@ -70,6 +66,7 @@ public class FoodProcessing : MonoBehaviour
 
             }
 
+            StaminaChange();
             stateMachine.FighterList.Insert(1, GameObject.Find(ClickForSearchInfo.nameVisitor));
             stateMachine.NextStep();
 
@@ -91,8 +88,6 @@ public class FoodProcessing : MonoBehaviour
                         if (item.visitor.Equals(ClickForSearchInfo.nameVisitor))
                             foreach (Food food in item.foodList)
                                 ShowOrder.foodName.Add(textVariantLanguage.FoodNameLocalization(food));
-                                //ShowOrder.foodName.Add(food.foodName);
-
                     }
                 }
 
@@ -123,7 +118,6 @@ public class FoodProcessing : MonoBehaviour
 
                 if (stateMachine.foodOrders.Count == 0)
                 {
-                    //stateMachine.BattleResultPanel.SetActive(true);
                     BattleResultShow.GoodEnd = true;
                     BattleResultShow.EndBattle = true;
                     stateMachine.BattleResultPanel.SetActive(true);
@@ -175,11 +169,11 @@ public class FoodProcessing : MonoBehaviour
         float deficitSkill = foodSkill - heroSkill;
 
         if (deficitSkill >= 1 && deficitSkill <= 3)
-            MiniGame.fast = 1f;
-        else if (deficitSkill >= 4 && deficitSkill <= 6)
             MiniGame.fast = 2f;
-        else if (deficitSkill >= 7)
+        else if (deficitSkill >= 4 && deficitSkill <= 6)
             MiniGame.fast = 3f;
+        else if (deficitSkill >= 7)
+            MiniGame.fast = 4f;
 
         PanelMiniGameWithCook.SetActive(true);
 

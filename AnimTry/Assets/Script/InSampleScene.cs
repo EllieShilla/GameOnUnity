@@ -13,6 +13,9 @@ public class InSampleScene : MonoBehaviour
     private GameObject IntoPanel;
     private bool playerInRange = false;
 
+    [SerializeField]
+    GameObject LoadingBar;
+
     private void OnTriggerEnter(Collider other)
     {
         if (other.gameObject.tag == "Character")
@@ -52,8 +55,23 @@ public class InSampleScene : MonoBehaviour
                 IntoPanel.SetActive(false);
                 playerInRange = false;
                 FromScene.loadPosition = returnPosition;
-                SceneManager.LoadScene("SampleScene");
+
+                StartCoroutine(LoadNextLevel());
+                //SceneManager.LoadScene("SampleScene");
             }
+        }
+    }
+
+    IEnumerator LoadNextLevel()
+    {
+        AsyncOperation loadLevel = SceneManager.LoadSceneAsync("SampleScene");
+        LoadingBar.SetActive(true);
+        GameObject.Find("BackgroundMusic").GetComponent<AudioSource>().Stop();
+
+        while (!loadLevel.isDone)
+        {
+            LoadingBar.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.Clamp01(loadLevel.progress / .9f);
+            yield return null;
         }
     }
 }

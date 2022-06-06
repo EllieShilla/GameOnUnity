@@ -15,9 +15,9 @@ public class MiniGame : MonoBehaviour
     float zMinus;
 
     RectTransform rectTransform;
-   public static int count = 0;
+    public static int count = 0;
 
-     void UpdateStartInfo()
+    void UpdateStartInfo()
     {
         Pointer = GameObject.Find("pointer");
         Stop = GameObject.Find("stopPlace");
@@ -111,5 +111,6 @@ public class MiniGame : MonoBehaviour
     }
 
 }
+
 
 

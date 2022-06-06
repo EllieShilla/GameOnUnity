@@ -13,7 +13,28 @@ public class Quest:ScriptableObject
     public Reward[] rewards;
     public bool isTaken;
     public bool isCompleted;
-    public string dataTypeGoal;
-    public string dataTypeRewards;
+
+    public enum TypeGoal
+    {
+        IntType,
+        StringIntType,
+        ItemType,
+        IngridientType
+    };
+
+    public enum TypeRewards
+    {
+        Money,
+        ColdShop,
+        HotShop,
+        Confectioner,
+        itemData,
+        ingridientData,
+        message,
+        none
+    };
+
+    public TypeGoal dataTypeGoal;
+    public TypeRewards dataTypeRewards;
     public Character questGiver;
 }

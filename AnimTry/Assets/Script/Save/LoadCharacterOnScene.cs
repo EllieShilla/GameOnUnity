@@ -79,5 +79,18 @@ public class LoadCharacterOnScene : MonoBehaviour
         {
             inventory.inventoryObj.questPhrases.Add(data.questPhrases[i]);
         }
+
+        //LastQuest.isShopPanel=data.StartQuestResult;
+
+        for (int i = 0; i < data.chests.Length; i++)
+        {
+            Chest chest = Resources.Load<Chest>($"ScriptObj/Chests/{data.chests[i][0]}");
+            chest.isClear = Convert.ToBoolean(data.chests[i][1]);
+        }
+
+        for (int i = 0; i < data.LearnDialogue.Length; i++)
+        {
+            LearnDialogBool.dialogueInfo[i][1] = data.LearnDialogue[i][1];
+        }
     }
 }

@@ -212,7 +212,14 @@ public class DialogueManager : MonoBehaviour
             quest_.isCompleted = true;
             questSystem.Reward(quest_);
 
+            if(quest_.name.Equals("StartQuest"))
+            {
+                LastQuest lastQuest = new LastQuest();
+                lastQuest.ShowPlaneLastQuest(gameObject.GetComponent<LastQuestPanel>().EndPanel);
+            }
+
             SaveQuest();
+
         }
 
         story.ChooseChoiceIndex(choice.index);

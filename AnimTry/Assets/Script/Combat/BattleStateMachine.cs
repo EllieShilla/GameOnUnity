@@ -180,7 +180,6 @@ public class BattleStateMachine : MonoBehaviour
                 //выбор героя который подавал блюдо
                 for (int i = 0; i < performList.Count; i++)
                 {
-                    //performList[i].FighterTarget = HeroesInBattle.Find(i => i.name == FighterList[2].name);
                     performList[i].FighterTarget = HeroesInBattle.Find(i => i.name == FighterList[FighterList.Count - 1].name);
                 }
 
@@ -194,13 +193,8 @@ public class BattleStateMachine : MonoBehaviour
                 }
 
 
-                FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
+                //FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
                 FighterList.RemoveAt(0);
-
-                ////смена фона панели информации на желтый(означает, что персонаж сейчас ходит)
-                //backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
-                //backgroundColor.color = new Color32(255, 205, 6, 255);
-
             }
             else
             {
@@ -210,22 +204,12 @@ public class BattleStateMachine : MonoBehaviour
                 backgroundColor = FighterList[0].GetComponent<HeroStateMaschine>().CharacterInformPanel.GetComponent<Image>();
                 backgroundColor.color = new Color32(255, 255, 255, 100);
 
-                //if (heroState.baseHeroero.currentReturn < 1)
-                //{
-                //    FighterList[0].transform.Find("Selector").gameObject.SetActive(false);
-                //    HeroesInBattle.RemoveAt(HeroesInBattle.FindIndex(i => i.name == FighterList[0].name));
-                //    FighterList.RemoveAt(0);
-                //}
-                //else
-                //{
                 FighterList.Add(FighterList[0]);
                 FighterList.RemoveAt(0);
-                ////}
 
                 StartCoroutine(changeCamera());
 
-                //if(FighterList.Count>0)
-                FighterList[FighterList.Count - 1].transform.Find("Selector").gameObject.SetActive(false);
+                //FighterList[FighterList.Count - 1].transform.Find("Selector").gameObject.SetActive(false);
 
                 if (FighterList[0].tag.Equals("Enemy"))
                     NextStep();
@@ -233,7 +217,7 @@ public class BattleStateMachine : MonoBehaviour
 
             ClearAndAddFoodToPanel();
 
-            FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
+            //FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
             battleState = PerformAction.PERFORMACTION;
 
             FoodPanel.SetActive(false);
@@ -273,10 +257,10 @@ public class BattleStateMachine : MonoBehaviour
 
     void SelectorPrepare()
     {
-        for (int i = 1; i < FighterList.Count; i++)
-            FighterList[i].transform.Find("Selector").gameObject.SetActive(false);
+        //for (int i = 1; i < FighterList.Count; i++)
+        //    FighterList[i].transform.Find("Selector").gameObject.SetActive(false);
 
-        FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
+        //FighterList[0].transform.Find("Selector").gameObject.SetActive(true);
     }
 
     void ActiveFoodListPanel()

@@ -67,7 +67,6 @@ public class DialogueTrigger : MonoBehaviour
             if (Input.GetKeyDown(KeyCode.E))
             {
                 IntoPanel.SetActive(false);
-                //DialogueManager.GetInstance().StartDialogue(inkJSON, ShopPanel, cafe);
                 if (LocalizationManager.Language.Equals("English"))
                     DialogueManager.GetInstance().StartDialogue(inkJSON_ENG, ShopPanel, cafe);
                 else

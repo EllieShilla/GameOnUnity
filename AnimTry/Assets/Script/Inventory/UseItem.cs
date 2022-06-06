@@ -30,6 +30,9 @@ public class UseItem : MonoBehaviour
                         if (SceneManager.GetActiveScene().name.Equals("FightScene"))
                         {
                             ChangeStaminaPanelInform(character);
+                            BattleStateMachine battleStateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
+                            battleStateMachine.NextStep();
+
                         }
 
                         isUse = true;
@@ -66,6 +69,8 @@ public class UseItem : MonoBehaviour
                         if (SceneManager.GetActiveScene().name.Equals("FightScene"))
                         {
                             ChangePreassurePanelInform(character);
+                            BattleStateMachine battleStateMachine = GameObject.Find("BattleManager").GetComponent<BattleStateMachine>();
+                            battleStateMachine.NextStep();
                         }
 
                         isUse = true;

@@ -21,7 +21,7 @@ public class ChooseCharacter : MonoBehaviour
 
         characters = new List<Character>();
         characters.AddRange(GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>().inventoryObj.group);
-         panel = parentPanel.transform.GetChild(0).gameObject;
+        panel = parentPanel.transform.GetChild(0).gameObject;
 
         ShowCharacter();
     }
@@ -78,6 +78,7 @@ public class ChooseCharacter : MonoBehaviour
     {
         GameObject img = gameObject.transform.GetChild(0).gameObject;
         img.GetComponent<Image>().sprite = character.characterPhoto;
+        img.name = character.baseHero.heroNameEng + "_" + gameObject.name + "Image";
         //Destroy(GameObject.Find("Character " + character.baseHero.heroName));
         switch (gameObject.name)
         {
@@ -87,6 +88,38 @@ public class ChooseCharacter : MonoBehaviour
             case "ColdShopButton":
                 StartCook.coldShopCook = character;
                 break;
+        }
+    }
+
+    private void Update()
+    {
+        //проверка панелек персонажей. Если персонаж выбран, его панелька будет неактивна и наоборот
+        if (GameObject.FindGameObjectsWithTag("CharacterInPanel").Length > 0)
+        {
+            foreach (GameObject item in GameObject.FindGameObjectsWithTag("CharacterInPanel"))
+            {
+                if (StartCook.hotShopCook != null && StartCook.coldShopCook == null)
+                {
+                    if (item.name.Split(' ')[1].Equals(StartCook.hotShopCook.baseHero.heroNameEng) )
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = false;
+                    else
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = true;
+                }
+                else if ( StartCook.coldShopCook != null && StartCook.hotShopCook == null)
+                {
+                    if (item.name.Split(' ')[1].Equals(StartCook.coldShopCook.baseHero.heroNameEng))
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = false;
+                    else
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = true;
+                }
+                else if (StartCook.coldShopCook != null && StartCook.hotShopCook != null)
+                {
+                    if (item.name.Split(' ')[1].Equals(StartCook.coldShopCook.baseHero.heroNameEng) || item.name.Split(' ')[1].Equals(StartCook.hotShopCook.baseHero.heroNameEng))
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = false;
+                    else
+                        item.transform.GetChild(5).GetComponent<Button>().interactable = true;
+                }
+            }
         }
     }
 

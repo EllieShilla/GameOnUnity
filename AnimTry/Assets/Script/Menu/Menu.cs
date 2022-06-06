@@ -11,6 +11,12 @@ using Assets.SimpleLocalization;
 
 public class Menu : MonoBehaviour
 {
+    [SerializeField]
+    GameObject InfoMenu;
+
+    [SerializeField]
+    GameObject _loadingBar;
+
     public void OpenPlaneBeforeExit()
     {
         GameObject.Find("MENU").transform.GetChild(1).gameObject.SetActive(true);
@@ -59,8 +65,25 @@ public class Menu : MonoBehaviour
     public void LoadGame()
     {
         FromScene.isContinue = true;
+
+        //PlayerData data = BinarySavingSystem.LoadPlayer();
+        //SceneManager.LoadScene(data.sceneName);
+
+        StartCoroutine(LoadNextLevel());
+
+    }
+
+    IEnumerator LoadNextLevel()
+    {
         PlayerData data = BinarySavingSystem.LoadPlayer();
-        SceneManager.LoadScene(data.sceneName);
+        AsyncOperation loadLevel = SceneManager.LoadSceneAsync(data.sceneName);
+        _loadingBar.SetActive(true);
+
+        while (!loadLevel.isDone)
+        {
+            _loadingBar.transform.GetChild(0).transform.GetChild(0).GetComponent<Image>().fillAmount = Mathf.Clamp01(loadLevel.progress / .9f);
+            yield return null;
+        }
     }
     Text TextInfo;
 
@@ -70,8 +93,7 @@ public class Menu : MonoBehaviour
         GameObject player = GameObject.Find("MainCharacter");
         AddInventoryToObj inventory = GameObject.Find("InventoryGameObject").GetComponent<AddInventoryToObj>();
         BinarySavingSystem.SavePlayer(inventory, player);
-        TextInfo = GameObject.Find("InfoMenu").GetComponent<Text>();
-        TextInfo.text = "Data saved";
+        InfoMenu.SetActive(true);
         StartCoroutine(MenuInfoClose());
     }
 
@@ -84,8 +106,7 @@ public class Menu : MonoBehaviour
     IEnumerator MenuInfoClose()
     {
         yield return new WaitForSeconds(1f);
-        TextInfo = GameObject.Find("InfoMenu").GetComponent<Text>();
-        TextInfo.text = "";
+        InfoMenu.SetActive(false);
     }
 
     public void ContinueFromPause()
@@ -223,4 +244,6 @@ public class Menu : MonoBehaviour
         }
     }
 }
+
+
 

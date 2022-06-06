@@ -12,8 +12,5 @@ public class Multilanguage : MonoBehaviour
             LocalizationManager.Language = PlayerPrefs.GetString("Language");
         else
             LocalizationManager.Language = "English";
-
-        //LocalizationManager.Language = "Russian";
-        //LocalizationManager.Language = "English";
     }
 }

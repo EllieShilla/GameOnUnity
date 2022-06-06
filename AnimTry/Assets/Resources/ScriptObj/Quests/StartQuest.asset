@@ -37,8 +37,8 @@ MonoBehaviour:
     itemData: {fileID: 0}
     ingridientData: {fileID: 0}
   rewards: []
-  isTaken: 0
+  isTaken: 1
   isCompleted: 0
-  dataTypeGoal: string
-  dataTypeRewards: 
+  dataTypeGoal: 1
+  dataTypeRewards: 7
   questGiver: {fileID: 11400000, guid: fdf6a58e3216e274bb34fb2dfda80b28, type: 2}

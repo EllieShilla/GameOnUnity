@@ -43,6 +43,6 @@ MonoBehaviour:
     message: 
   isTaken: 1
   isCompleted: 1
-  dataTypeGoal: Item
-  dataTypeRewards: money
+  dataTypeGoal: 2
+  dataTypeRewards: 0
   questGiver: {fileID: 11400000, guid: ace7ae53464739041bbfcbff39247f87, type: 2}

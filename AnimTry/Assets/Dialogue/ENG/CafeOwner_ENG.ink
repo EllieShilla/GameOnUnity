@@ -1,5 +1,5 @@
 [CafeOwner]
-Hello, employee of the month!
+Hello, best employee of the month!
 *[Best because the only one?]
 [CafeOwner]
 But what about me? 

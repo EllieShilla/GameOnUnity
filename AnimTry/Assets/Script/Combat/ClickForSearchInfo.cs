@@ -40,8 +40,6 @@ public class ClickForSearchInfo : MonoBehaviour, IPointerClickHandler
             if (item.visitor.Equals(gameObject.name))
                 foreach (Food food in item.foodList)
                     ShowOrder.foodName.Add(textVariantLanguage.FoodNameLocalization(food));
-                    //ShowOrder.foodName.Add(food.foodName);
-
         }
 
         transform.Find("ChooseV").gameObject.SetActive(true); //выделение выбраного посетителя

@@ -11,46 +11,32 @@ Menu.Yes,Yes,Да
 Menu.No,No,Нет
 Menu.SaveBefore,Save data before closing?,Сохранить данные перед закрытием?
 Menu.KeyBinding,"
-Movement - Up
 
+Movement - Up
 
 Movement - Down
 
-
 Movement - Left
-
 
 Movement - Right
 
-
 Sprint
 
-
-Open inventory
-
-
-Stop a running slider during a mini-game fight
-","Движение - Вверх
-
+Open inventory","
+Движение - Вверх
 
 Движение - Вниз
 
-
 Движение - Влево
-
 
 Движение - Вправо
 
-
 Спринт
 
-
-Открыть инвентарь
-
-
-Остановить бегающий ползунок во время боя в мини игре"
+Открыть инвентарь"
 Menu.KeyBindings,KEY BINDINGS,УПРАВЛЕНИЕ
 Menu.Localization,LANGUAGE,ЯЗЫК
 Menu.English,ENGLISH,АНГЛИЙСКИЙ
 Menu.Russian,RUSSIAN,РУССКИЙ
 Menu.MainMenu,MAIN MENU,ГЛАВНОЕ МЕНЮ
+Menu.Save,Data saved,Идет сохранение

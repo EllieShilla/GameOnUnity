@@ -15,6 +15,7 @@ public class Move : MonoBehaviour
     [SerializeField]
     private GameObject MenuPanel;
     static bool isMenuActive = false;
+    int countTimeScale;
 
     public static void ActiveMenu(bool inform)
     {
@@ -28,6 +29,7 @@ public class Move : MonoBehaviour
     }
     private void Update()
     {
+        countTimeScale = 0;
 
         if (!SceneManager.GetActiveScene().name.Equals("FightScene"))
         {
@@ -74,8 +76,8 @@ public class Move : MonoBehaviour
 
         }
 
-        //Open-Close Menu
-        if (Input.GetKeyDown(KeyCode.Escape))
+        //Open-Close Menu. При открытом инвентаре меню не откроется
+        if (Input.GetKeyDown(KeyCode.Escape) && !isInventoryActive)
         {
             if (!Move.isMenuActive)
             {
@@ -89,20 +91,25 @@ public class Move : MonoBehaviour
 
         if (Move.isMenuActive)
         {
-            MenuPanel.SetActive(true);
-
-            Menu.ActiveMenuButton(MenuPanel);
-
-            Time.timeScale = 0f;
+            if (MenuPanel != null)
+            {
+                MenuPanel.SetActive(true);
+                Menu.ActiveMenuButton(MenuPanel);
+                Time.timeScale = 0f;
+            }
         }
         else
         {
-            MenuPanel.SetActive(false);
-            Time.timeScale = 1f;
+            if (MenuPanel != null)
+            {
+                MenuPanel.SetActive(false);
+                Time.timeScale = 1f;
+            }
         }
 
-        //действия при открытии и закрытии инвентаря
-        if (Input.GetKeyDown(KeyCode.I))
+
+        //действия при открытии и закрытии инвентаря. При открытом меню инвентарь не откроется
+        if (Input.GetKeyDown(KeyCode.I) && !Move.isMenuActive)
         {
             if (!isInventoryActive)
             {
@@ -124,7 +131,6 @@ public class Move : MonoBehaviour
 
                     }
                 }
-
             }
             else
             {
@@ -141,7 +147,15 @@ public class Move : MonoBehaviour
             }
         }
 
-
+        //если инвентарь открыт, герой не может двигаться и наоборот
+        if (!isInventoryActive)
+        {
+            Move.canMove = true;
+        }
+        else
+        {
+            Move.canMove = false;
+        }
     }
 }
 

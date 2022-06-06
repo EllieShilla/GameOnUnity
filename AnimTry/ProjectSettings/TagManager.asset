@@ -19,6 +19,7 @@ TagManager:
   - MenuItem
   - ItemForCreate
   - QuestListInInventory
+  - Chests
   layers:
   - Default
   - TransparentFX
